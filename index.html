@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe With Sammi — Designer. Photographer. Creator.</title>
+  <meta name="description" content="Sammi Oyeniyi — designer, photographer, and creator based in Atlanta." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────── -->
+  <nav id="main-nav" class="nav-top" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Vibe With Sammi Home">
+        Vibe With <span>Sammi</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="https://floyecreative.co" target="_blank" rel="noopener">Design</a></li>
+        <li><a href="content.html">Content</a></li>
+        <li><a href="mailto:vibewithsammi@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────── -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg" role="img" aria-label="Moody blue-toned photo of a building on the Atlanta Beltline"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Atlanta, Georgia</p>
+      <h1 class="hero-name">Sammi Oyeniyi</h1>
+      <p class="hero-title">Designer. Photographer. Creator.</p>
+      <div class="hero-line" aria-hidden="true"></div>
+      <a href="#about" class="btn btn-gold" aria-label="Scroll down to explore my work">
+        Explore My Work
+      </a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">Scroll</div>
+  </section>
+
+  <!-- ── ABOUT ────────────────────────────────────── -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-photo">
+          <div class="about-photo-frame">
+            <img src="assets/450A0228.jpg" alt="Portrait of Sammi Oyeniyi" />
+          </div>
+        </div>
+
+        <div class="about-text">
+          <span class="section-label">About Me</span>
+          <h2 id="about-heading">Hey,<br>I'm <em>Sammi.</em></h2>
+          <div class="about-divider" aria-hidden="true"></div>
+          <p>
+            I'm a designer, developer, beginner photographer, and creator based in Atlanta.
+            I build thoughtful digital experiences, capture the world through my lens,
+            and document the creative process as I figure it out in real time.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PATHS ────────────────────────────────────── -->
+  <section id="paths" aria-labelledby="paths-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="display:block; text-align:center;">What I Do</span>
+        <h2 id="paths-heading">Choose Your<br><span class="accent">Path</span></h2>
+        <p class="section-sub">Three corners of the creative universe. Pick one — or explore all.</p>
+      </div>
+
+      <div class="paths-grid">
+
+        <!-- Card 1: Photography -->
+        <div class="path-card">
+          <span class="path-number" aria-hidden="true">01</span>
+          <div class="path-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <h3>Photography</h3>
+          <p>Explore recent events, galleries, and featured shots from around Atlanta.</p>
+          <a href="photography.html" class="btn btn-ghost">View Photography</a>
+        </div>
+
+        <!-- Card 2: Design -->
+        <div class="path-card">
+          <span class="path-number" aria-hidden="true">02</span>
+          <div class="path-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3>Design</h3>
+          <p>Need a website or creative direction? Visit Floye Creative Co. for design services.</p>
+          <a href="https://floye.co" target="_blank" rel="noopener" class="btn btn-ghost">Visit Floye Creative</a>
+        </div>
+
+        <!-- Card 3: Content -->
+        <div class="path-card">
+          <span class="path-number" aria-hidden="true">03</span>
+          <div class="path-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+          <h3>Content</h3>
+          <p>Follow along for photography, tech, design, lifestyle, and creative experiments.</p>
+          <a href="content.html" class="btn btn-ghost">View Content</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <h3>Vibe With <span>Sammi</span></h3>
+          <p>Designer. Photographer. Creator.</p>
+          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">
+            Say Hello
+          </a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="https://floye.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://floye.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Sammi Oyeniyi · Vibe With Sammi. All rights reserved.</p>
+        <p>Made with intention in Atlanta, GA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Hide/show nav on scroll ──────────────────────
+    (function () {
+      const nav = document.getElementById('main-nav');
+      let lastY = 0;
+      let ticking = false;
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            const y = window.scrollY;
+
+            if (y < 60) {
+              nav.classList.remove('nav-hidden', 'nav-visible');
+              nav.classList.add('nav-top');
+            } else {
+              nav.classList.remove('nav-top');
+              if (y > lastY) {
+                // scrolling down
+                nav.classList.add('nav-hidden');
+                nav.classList.remove('nav-visible');
+              } else {
+                // scrolling up
+                nav.classList.remove('nav-hidden');
+                nav.classList.add('nav-visible');
+              }
+            }
+
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
