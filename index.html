@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
 </head>
 <body>
 
@@ -23,10 +24,28 @@
         <li><a href="photography.html">Photography</a></li>
         <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
         <li><a href="content.html">Content</a></li>
-        <li><a href="mailto:vibewithsammi@gmail.com">Contact</a></li>
+        <li><a href="mailto:hello.vibewithsammi@gmail.com">Contact</a></li>
       </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- ── Mobile nav drawer ──────────────────────── -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+      <li><a href="content.html">Content</a></li>
+      <li><a href="mailto:hello.vibewithsammi@gmail.com">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-meta">
+      <p>Atlanta, GA</p>
+      <a href="mailto:hello.vibewithsammi@gmail.com">hello.vibewithsammi@gmail.com</a>
+    </div>
+  </div>
 
   <!-- ── HERO ─────────────────────────────────────── -->
   <section id="hero" aria-label="Hero">
@@ -53,7 +72,7 @@
 
         <div class="about-photo">
           <div class="about-photo-frame">
-            <img src="assets/450A0228.jpg" alt="Portrait of Sammi Oyeniyi" />
+           <img src="assets/450A0228.jpg" alt="Portrait of Sammi Oyeniyi" />
           </div>
         </div>
 
@@ -83,7 +102,6 @@
 
       <div class="paths-grid">
 
-        <!-- Card 1: Photography -->
         <div class="path-card">
           <span class="path-number" aria-hidden="true">01</span>
           <div class="path-icon" aria-hidden="true">
@@ -97,7 +115,6 @@
           <a href="photography.html" class="btn btn-ghost">View Photography</a>
         </div>
 
-        <!-- Card 2: Design -->
         <div class="path-card">
           <span class="path-number" aria-hidden="true">02</span>
           <div class="path-icon" aria-hidden="true">
@@ -107,10 +124,9 @@
           </div>
           <h3>Design</h3>
           <p>Need a website or creative direction? Visit Floye Creative Co. for design services.</p>
-          <a href="https://floyecreative.co" target="_blank" rel="noopener" class="btn btn-ghost">Visit Floye Creative</a>
+          <a href="https://www.floyecreative.co/" target="_blank" rel="noopener" class="btn btn-ghost">Visit Floye Creative</a>
         </div>
 
-        <!-- Card 3: Content -->
         <div class="path-card">
           <span class="path-number" aria-hidden="true">03</span>
           <div class="path-icon" aria-hidden="true">
@@ -135,7 +151,7 @@
         <div class="footer-brand">
           <h3>Vibe With <span>Sammi</span></h3>
           <p>Designer. Photographer. Creator.</p>
-          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">
+          <a href="mailto:hello.vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">
             Say Hello
           </a>
         </div>
@@ -146,7 +162,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="photography.html">Photography</a></li>
             <li><a href="content.html">Content</a></li>
-            <li><a href="https://floyecreative.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+            <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Floye Creative Co.</a></li>
           </ul>
         </div>
 
@@ -154,8 +170,8 @@
           <h4>Connect</h4>
           <ul class="footer-links" role="list">
             <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://floyecreative.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
-            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+            <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+            <li><a href="mailto:hello.vibewithsammi@gmail.com">hello.vibewithsammi@gmail.com</a></li>
           </ul>
         </div>
 
@@ -169,39 +185,70 @@
   </footer>
 
   <script>
-    // ── Hide/show nav on scroll ──────────────────────
     (function () {
+      /* ── Nav hide/show on scroll ──────────────── */
       const nav = document.getElementById('main-nav');
-      let lastY = 0;
-      let ticking = false;
+      let lastY = 0, ticking = false;
 
       window.addEventListener('scroll', function () {
         if (!ticking) {
           requestAnimationFrame(function () {
             const y = window.scrollY;
-
             if (y < 60) {
               nav.classList.remove('nav-hidden', 'nav-visible');
               nav.classList.add('nav-top');
             } else {
               nav.classList.remove('nav-top');
               if (y > lastY) {
-                // scrolling down
                 nav.classList.add('nav-hidden');
                 nav.classList.remove('nav-visible');
               } else {
-                // scrolling up
                 nav.classList.remove('nav-hidden');
                 nav.classList.add('nav-visible');
               }
             }
-
             lastY = y;
             ticking = false;
           });
           ticking = true;
         }
       });
+
+      /* ── Hide placeholder images that have no src ── */
+      document.querySelectorAll('.hero-img img').forEach(function (img) {
+        if (!img.src || img.src === window.location.href) {
+          img.closest('.hero-img').style.display = 'none';
+        }
+      });
+
+    /* ── Mobile nav drawer ──────────────────── */
+      const toggle = document.getElementById('nav-toggle');
+      const drawer = document.getElementById('nav-drawer');
+      if (toggle && drawer) {
+        toggle.addEventListener('click', function () {
+          const isOpen = drawer.classList.toggle('open');
+          toggle.classList.toggle('open', isOpen);
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        drawer.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            drawer.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && drawer.classList.contains('open')) {
+            drawer.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            toggle.focus();
+          }
+        });
+      }
     })();
   </script>
 

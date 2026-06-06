@@ -9,6 +9,265 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ══════════════════════════════════════════════
+       MARQUEE GALLERY
+       ══════════════════════════════════════════════ */
+
+    #featured {
+      border-bottom: 1px solid rgba(175,194,213,0.07);
+      overflow: hidden;
+      /* remove default section side padding for marquee to bleed edge-to-edge */
+    }
+
+    #featured .container { margin-bottom: 48px; }
+
+    /* ── Track wrapper ─────────────────────────── */
+    .marquee-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      overflow: hidden;
+      --duration-a: 28s;
+    }
+
+    .marquee-stage:hover .marquee-track,
+    .marquee-stage:focus-within .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none !important; }
+      .marquee-row   { overflow-x: auto; }
+    }
+
+    /* ── Each row ──────────────────────────────── */
+    .marquee-row {
+      display: flex;
+      width: max-content; /* natural width so CSS animation can scroll it */
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 14px;
+      /* duplicate set of images side-by-side for seamless loop */
+    }
+
+    .marquee-row--a .marquee-track {
+      animation: scroll-left var(--duration-a) linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Individual photo card ─────────────────── */
+    .marquee-item {
+      flex: 0 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      /* vary heights for visual rhythm */
+    }
+
+    /* Alternate heights: portrait or landscape */
+    .marquee-item--tall  { width: 260px;  height: 340px; }
+    .marquee-item--wide  { width: 400px;  height: 260px; }
+    .marquee-item--sq    { width: 280px;  height: 280px; }
+
+    .marquee-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none; /* click goes to the card, not the img */
+    }
+
+    .marquee-item:hover img,
+    .marquee-item:focus-visible img {
+      transform: scale(1.05);
+    }
+
+    .marquee-item:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    /* Placeholder card (before real photos) */
+    .marquee-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #0D1E30, #12385C 60%, #07111F);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: rgba(175,194,213,0.25);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .marquee-placeholder svg { opacity: 0.25; }
+
+    /* Subtle overlay on hover to hint clickability */
+    .marquee-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(7,17,31,0);
+      transition: background 0.3s;
+      border-radius: inherit;
+    }
+    .marquee-item:hover::after { background: rgba(7,17,31,0.18); }
+
+    /* Expand icon hint */
+    .marquee-item .expand-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(7,17,31,0.65);
+      border: 1px solid rgba(175,194,213,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+    .marquee-item:hover .expand-hint { opacity: 1; transform: scale(1); }
+
+    /* Mobile: smaller cards */
+    @media (max-width: 600px) {
+      .marquee-item--tall { width: 180px; height: 230px; }
+      .marquee-item--wide { width: 270px; height: 180px; }
+      .marquee-item--sq   { width: 200px; height: 200px; }
+      .marquee-stage { --duration-a: 28s; --duration-b: 34s; }
+    }
+
+    /* ══════════════════════════════════════════════
+       LIGHTBOX
+       ══════════════════════════════════════════════ */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(4, 9, 15, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      padding: 24px;
+    }
+
+    #lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: min(90vw, 1100px);
+      max-height: 90svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox-img {
+      display: block;
+      max-width: 100%;
+      max-height: 90svh;
+      border-radius: var(--radius);
+      object-fit: contain;
+      transform: scale(0.94);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+
+    #lightbox.open #lightbox-img { transform: scale(1); }
+
+    /* Close button */
+    #lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(175,194,213,0.12);
+      border: 1px solid rgba(175,194,213,0.2);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10001;
+    }
+    #lightbox-close:hover { background: rgba(175,194,213,0.22); transform: rotate(90deg); }
+    #lightbox-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    /* Prev / Next arrows */
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(175,194,213,0.1);
+      border: 1px solid rgba(175,194,213,0.18);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 10001;
+    }
+    .lightbox-arrow:hover { background: rgba(175,194,213,0.22); }
+    .lightbox-arrow:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    #lightbox-prev { left: 16px; }
+    #lightbox-next { right: 16px; }
+
+    /* Caption */
+    #lightbox-caption {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(175,194,213,0.5);
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 10001;
+    }
+
+    @media (max-width: 600px) {
+      .lightbox-arrow { width: 40px; height: 40px; }
+      #lightbox-prev { left: 8px; }
+      #lightbox-next { right: 8px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -21,12 +280,30 @@
       <ul class="nav-links" role="list">
         <li><a href="index.html#about">About</a></li>
         <li><a href="photography.html" class="active" aria-current="page">Photography</a></li>
-        <li><a href="https://floyecreative.co" target="_blank" rel="noopener">Design</a></li>
+        <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
         <li><a href="content.html">Content</a></li>
-        <li><a href="mailto:vibewithsammi@gmail.com">Contact</a></li>
+        <li><a href="mailto:hello.vibewithsammi@gmail.com">Contact</a></li>
       </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- ── Mobile nav drawer ──────────────────────── -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+      <li><a href="content.html">Content</a></li>
+      <li><a href="mailto:hello.vibewithsammi@gmail.com">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-meta">
+      <p>Atlanta, GA</p>
+      <a href="mailto:hello.vibewithsammi@gmail.com">hello.vibewithsammi@gmail.com</a>
+    </div>
+  </div>
 
   <!-- ── PAGE HERO ────────────────────────────────── -->
   <header class="page-hero" aria-labelledby="page-title">
@@ -41,44 +318,84 @@
     </div>
   </header>
 
-  <!-- ── FEATURED WORK ────────────────────────────── -->
-  <section id="featured" aria-labelledby="featured-heading" style="border-bottom: 1px solid rgba(175,194,213,0.07);">
+  <!-- ── FEATURED WORK — MARQUEE ───────────────────── -->
+  <section id="featured" aria-labelledby="featured-heading">
+
     <div class="container">
       <div class="section-intro">
         <div>
           <span class="section-label">Gallery</span>
           <h2 class="section-heading" id="featured-heading">Featured<br><span class="accent">Work</span></h2>
-          <p style="font-size:14px; color:var(--muted); max-width:380px; line-height:1.7;">Architecture, plants, street details, and creative shots from around Atlanta and beyond.</p>
+          <p style="font-size:14px; color:var(--muted); max-width:380px; line-height:1.7;">
+            Architecture, plants, street details, and creative shots from around Atlanta and beyond.
+            Click any image to view full screen.
+          </p>
         </div>
-      </div>
-
-      <div class="featured-grid" role="list" aria-label="Featured photography gallery">
-
-        <div class="featured-item" role="listitem">
-        <img src="assets/IMG_0560 edit.jpg" alt="Describe your shot" />
-        </div>
-
-        <div class="featured-item" role="listitem">
-          <img src="assets/1-IMG_2664.jpg" alt="Describe your shot" />
-        </div>
-        <div class="featured-item" role="listitem">
-          <img src="assets/1-IMG_0343.jpg" alt="Describe your shot" />
-        </div>
-        <div class="featured-item" role="listitem">
-          <div class="gallery-placeholder"><span>Street</span></div>
-        </div>
-        <div class="featured-item" role="listitem">
-          <div class="gallery-placeholder"><span>Plants</span></div>
-        </div>
-        <div class="featured-item" role="listitem">
-          <div class="gallery-placeholder"><span>Creative</span></div>
-        </div>
-        <div class="featured-item" role="listitem">
-          <div class="gallery-placeholder"><span>Atlanta</span></div>
-        </div>
-
       </div>
     </div>
+
+    <!-- Marquee bleeds full width -->
+    <div class="marquee-stage" aria-label="Scrolling photo gallery" role="region">
+
+      <!-- ROW A — scrolls left -->
+      <div class="marquee-row marquee-row--a" aria-hidden="true">
+        <div class="marquee-track" id="track-a">
+
+          <!-- ─── Add your photos here. Pattern:
+               <div class="marquee-item marquee-item--[tall|wide|sq]"
+                    tabindex="0" role="button"
+                    aria-label="Brief description of photo"
+                    data-src="path/to/full-res.jpg"
+                    data-caption="Optional caption">
+                 <img src="path/to/photo.jpg" alt="Brief description" loading="lazy" />
+                 <span class="expand-hint" aria-hidden="true">
+                   <svg ...expand icon... />
+                 </span>
+               </div>
+          ─── -->
+
+          <!-- Placeholders — replace with real <img> tags -->
+          <div class="marquee-item marquee-item--tall" tabindex="0" role="button" aria-label="Featured photo 1" data-src="assets/1-IMG_2664.jpg" data-caption="Featured · 01">
+            <img src="assets/1-IMG_2664.jpg" alt="woman standing smiling in the sun">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+
+          <div class="marquee-item marquee-item--wide" tabindex="0" role="button" aria-label="Featured photo 2" data-src="assets/IMG_0560 edit.jpg" data-caption="Featured · 02">
+            <img src="assets/IMG_0560 edit.jpg" alt="close up of a green plant">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+          <div class="marquee-item marquee-item--sq" tabindex="0" role="button" aria-label="Featured photo 3" data-src="assets/IMG_0181.JPG" data-caption="Featured · 03">
+            <img src="assets/IMG_0181.JPG" alt="a light up pick up order sign">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+          <div class="marquee-item marquee-item--tall" tabindex="0" role="button" aria-label="Featured photo 4" data-src="assets/IMG_0229.JPG" data-caption="Featured · 04">
+            <img src="assets/IMG_0229.JPG" alt="a hand holding a rose against a black background">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+          <div class="marquee-item marquee-item--tall" tabindex="0" role="button" aria-label="Featured photo 5" data-src="assets/1-IMG_0343.jpg" data-caption="Featured · 05">
+            <img src="assets/1-IMG_0343.jpg" alt="a man breakdancing on his head in a crowd">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+          <div class="marquee-item marquee-item--tall" tabindex="0" role="button" aria-label="Featured photo 6" data-src="assets/IMG_0222.JPG" data-caption="Featured · 06">
+            <img src="assets/IMG_0222.JPG" alt="an illuminated bouquet of flowers against a dark background">
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div>
+
+          <!-- <div class="marquee-item marquee-item--tall" tabindex="0" role="button" aria-label="Featured photo 7" data-src="" data-caption="Featured · 07">
+            <div class="marquee-placeholder"><span>Photo 07</span></div>
+            <span class="expand-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+          </div> -->
+
+        </div>
+        <!-- JS will duplicate the track for seamless looping -->
+      </div>
+
+    </div><!-- /.marquee-stage -->
   </section>
 
   <!-- ── EVENTS ───────────────────────────────────── -->
@@ -94,15 +411,10 @@
 
       <div class="events-grid">
 
-        <!-- Event 1 -->
-        <article class="event-card" aria-labelledby="event1-title">
+        <!-- <article class="event-card" aria-labelledby="event1-title">
           <div class="event-thumb">
-            <!-- Replace: <img src="tennis-on-the-block.jpg" alt="Tennis on the Block, June 2026" /> -->
             <div class="placeholder-img">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M6.34 6.34a5 5 0 0 1 7.07 0M17.66 17.66a5 5 0 0 1-7.07 0"/>
-              </svg>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M6.34 6.34a5 5 0 0 1 7.07 0M17.66 17.66a5 5 0 0 1-7.07 0"/></svg>
               <span>Event Cover</span>
             </div>
           </div>
@@ -120,12 +432,11 @@
               </a>
             </div>
           </div>
-        </article>
+        </article> -->
 
-        <!-- Event 2 -->
         <article class="event-card" aria-labelledby="event2-title">
           <div class="event-thumb">
-            Replace: <img src="assets/IMG_0451.JPG" alt="Controllerise 6.1, June 2026" />
+            <img src="assets/IMG_0451.JPG" alt="woman coloring in a dimly lit event" style="object-position: center 30%;">
           </div>
           <div class="event-body">
             <div class="event-meta">
@@ -135,7 +446,7 @@
             <h3 id="event2-title">Controllerise<br>6.1</h3>
             <p>Atlanta's gaming culture on full display. A night of community, competition, and creative energy — captured through the lens.</p>
             <div>
-              <a href="https://drive.google.com/placeholder-controllerise" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="View Controllerise 6.1 gallery">
+              <a href="https://drive.google.com/drive/folders/1bugFnNgGHDt2KpCEUUcamzTELU8nmSxZ?usp=sharing" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="View Controllerise 6.1 gallery">
                 View Gallery
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
               </a>
@@ -143,26 +454,17 @@
           </div>
         </article>
 
-        <!-- Placeholder future events -->
         <article class="event-card coming-soon" aria-label="More events coming soon">
           <div class="event-thumb">
             <div class="placeholder-img">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
           </div>
           <div class="event-body">
-            <div class="event-meta">
-              <span class="event-type">Coming Soon</span>
-            </div>
+            <div class="event-meta"><span class="event-type">Coming Soon</span></div>
             <h3>More Events<br>Soon</h3>
             <p>Always shooting. Check back for new galleries and Atlanta moments added regularly.</p>
-            <div>
-              <a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener" class="btn btn-outline">Follow Along</a>
-            </div>
+            <div><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener" class="btn btn-outline">Follow Along</a></div>
           </div>
         </article>
 
@@ -177,7 +479,7 @@
         <div class="footer-brand">
           <h3>Vibe With <span>Sammi</span></h3>
           <p>Designer. Photographer. Creator.</p>
-          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">Say Hello</a>
+          <a href="mailto:hello.vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">Say Hello</a>
         </div>
         <div class="footer-col">
           <h4>Explore</h4>
@@ -185,15 +487,15 @@
             <li><a href="index.html#about">About</a></li>
             <li><a href="photography.html">Photography</a></li>
             <li><a href="content.html">Content</a></li>
-            <li><a href="https://floye.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+            <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Floye Creative Co.</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Connect</h4>
           <ul class="footer-links" role="list">
             <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://floye.co" target="_blank" rel="noopener">Floye Creative Co.</a></li>
-            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+            <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+            <li><a href="mailto:hello.vibewithsammi@gmail.com">hello.vibewithsammi@gmail.com</a></li>
           </ul>
         </div>
       </div>
@@ -204,32 +506,196 @@
     </div>
   </footer>
 
+  <!-- ── LIGHTBOX ──────────────────────────────────── -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="lightbox-close" aria-label="Close photo viewer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-arrow" id="lightbox-prev" aria-label="Previous photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <button class="lightbox-arrow" id="lightbox-next" aria-label="Next photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <p id="lightbox-caption"></p>
+  </div>
+
   <script>
-    (function () {
-      const nav = document.getElementById('main-nav');
-      let lastY = 0;
-      let ticking = false;
-      window.addEventListener('scroll', function () {
-        if (!ticking) {
-          requestAnimationFrame(function () {
-            const y = window.scrollY;
-            if (y < 60) {
-              nav.classList.remove('nav-hidden', 'nav-visible', 'nav-top');
-            } else if (y > lastY) {
-              nav.classList.add('nav-hidden');
-              nav.classList.remove('nav-visible');
-            } else {
-              nav.classList.remove('nav-hidden');
-              nav.classList.add('nav-visible');
-            }
-            lastY = y;
-            ticking = false;
-          });
-          ticking = true;
+  (function () {
+
+    /* ── Nav hide/show ──────────────────────────── */
+    const nav = document.getElementById('main-nav');
+    let lastY = 0, ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          const y = window.scrollY;
+          if (y < 60) {
+            nav.classList.remove('nav-hidden', 'nav-visible', 'nav-top');
+          } else if (y > lastY) {
+            nav.classList.add('nav-hidden');
+            nav.classList.remove('nav-visible');
+          } else {
+            nav.classList.remove('nav-hidden');
+            nav.classList.add('nav-visible');
+          }
+          lastY = y;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    /* ── Marquee: duplicate track for seamless loop ── */
+    ['track-a'].forEach(function (id) {
+      const track = document.getElementById(id);
+      if (!track) return;
+      const clone = track.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('id');
+      // remove tabindex from clones so keyboard doesn't hit them twice
+      clone.querySelectorAll('[tabindex]').forEach(function (el) {
+        el.removeAttribute('tabindex');
+      });
+      track.parentElement.appendChild(clone);
+    });
+
+    /* ── Lightbox ───────────────────────────────── */
+    const lightbox    = document.getElementById('lightbox');
+    const lbImg       = document.getElementById('lightbox-img');
+    const lbCaption   = document.getElementById('lightbox-caption');
+    const lbClose     = document.getElementById('lightbox-close');
+    const lbPrev      = document.getElementById('lightbox-prev');
+    const lbNext      = document.getElementById('lightbox-next');
+
+    // Collect only the original (non-cloned) items that have a real src
+    let items = [];
+    let current = 0;
+
+    function refreshItems() {
+      // grab from original track only (clones have no tabindex)
+      items = Array.from(document.querySelectorAll('.marquee-item[tabindex="0"]'));
+    }
+
+    function openLightbox(index) {
+      refreshItems();
+      if (!items.length) return;
+      current = ((index % items.length) + items.length) % items.length;
+
+      const item = items[current];
+      const src  = item.dataset.src;
+      const alt  = item.getAttribute('aria-label') || '';
+      const cap  = item.dataset.caption || '';
+
+      // If placeholder (no src), show placeholder state
+      if (!src) {
+        lbImg.src = '';
+        lbImg.alt = alt;
+        lbImg.style.display = 'none';
+        lbCaption.textContent = cap || alt;
+      } else {
+        lbImg.style.display = 'block';
+        lbImg.src = src;
+        lbImg.alt = alt;
+        lbCaption.textContent = cap || alt;
+      }
+
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+
+      // update arrows visibility
+      lbPrev.style.opacity = items.length > 1 ? '1' : '0';
+      lbNext.style.opacity = items.length > 1 ? '1' : '0';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      openLightbox(current + dir);
+    }
+
+    // Open on click or Enter/Space
+    document.addEventListener('click', function (e) {
+      const item = e.target.closest('.marquee-item[tabindex="0"]');
+      if (item) {
+        refreshItems();
+        openLightbox(items.indexOf(item));
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      const item = document.activeElement.closest
+        ? document.activeElement.closest('.marquee-item[tabindex="0"]')
+        : null;
+      if (item && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        refreshItems();
+        openLightbox(items.indexOf(item));
+      }
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   navigate(-1);
+      if (e.key === 'ArrowRight')  navigate(1);
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', function () { navigate(-1); });
+    lbNext.addEventListener('click', function () { navigate(1); });
+
+    // Click backdrop to close
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', function (e) {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    /* ── Mobile nav drawer ──────────────────── */
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('nav-drawer');
+    if (toggle && drawer) {
+      toggle.addEventListener('click', function () {
+        const isOpen = drawer.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          drawer.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+          drawer.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+          toggle.focus();
         }
       });
-    })();
+    }
+
+  })();
   </script>
 
 </body>
-</html>
+</html>x
