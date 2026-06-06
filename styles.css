@@ -816,6 +816,7 @@ nav .container {
   border-radius: var(--radius-lg);
   background: var(--card-bg);
   margin-bottom: 64px;
+  
 }
 
 .ig-cta p.section-label { margin-bottom: 12px; }
@@ -939,6 +940,7 @@ footer {
   .section-intro { flex-direction: column; align-items: flex-start; }
 
   .page-hero { padding: 120px 0 56px; }
+  .ig-cta .btn { margin-top: 8px; }
 }
 
 @media (max-width: 600px) {
