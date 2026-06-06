@@ -749,28 +749,44 @@ nav .container {
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: border-color 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 .video-card:hover { border-color: rgba(200,150,12,0.35); transform: translateY(-3px); }
 
+/* Flexible embed container — lets TikTok set its own height */
 .video-embed {
-  position: relative;
   width: 100%;
-  aspect-ratio: 9/16;
+  min-height: 400px;
   background: #000;
   overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
+/* TikTok blockquote resets — strip its default margin/width constraints */
+.video-embed .tiktok-embed {
+  margin: 0 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Legacy iframe embeds still supported */
 .video-embed iframe {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   border: none;
+  display: block;
 }
 
+/* Placeholder shown before embed is added */
 .video-placeholder {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  min-height: 400px;
   background: linear-gradient(160deg, #0D1E30, #07111F);
   display: flex;
   align-items: center;
@@ -782,7 +798,6 @@ nav .container {
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-
 .video-placeholder svg { opacity: 0.3; }
 
 .video-label {
