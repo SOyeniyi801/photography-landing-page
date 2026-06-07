@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Vibe With Sammi</title>
+  <meta name="description" content="Get in touch with Sammi Oyeniyi — find her on Instagram, TikTok, or send an email." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.1);
+      border-radius: var(--radius-lg);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .contact-card:hover { border-color: rgba(200,150,12,0.4); transform: translateY(-4px); }
+    .contact-card:hover::before { opacity: 1; }
+    .contact-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .contact-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: var(--gold-dim);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .contact-card-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .contact-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(24px, 3vw, 38px);
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      line-height: 1.1;
+    }
+    .contact-card-sub {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.7; flex: 1;
+    }
+    .contact-card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .contact-card:hover .contact-card-cta { gap: 12px; }
+    @media (max-width: 960px) {
+      .contact-grid { grid-template-columns: 1fr; max-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Vibe With <span>Sammi</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+        <li><a href="content.html">Content</a></li>
+        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+      <li><a href="content.html">Content</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-meta">
+      <p>Atlanta, GA</p>
+      <a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a>
+    </div>
+  </div>
+
+  <header class="page-hero" aria-labelledby="contact-title">
+    <div class="container">
+      <span class="section-label">Keep In Touch</span>
+      <div class="page-hero-line" aria-hidden="true"></div>
+      <h1 id="contact-title">Say <span>Hello.</span></h1>
+      <p>Find me on socials or slide into the inbox — always open to connecting.</p>
+    </div>
+  </header>
+
+  <section aria-label="Ways to get in touch">
+    <div class="container">
+      <h2 class="section-heading">Find me <span class="accent">here</span></h2>
+      <div class="contact-grid">
+
+        <a href="mailto:vibewithsammi@gmail.com" class="contact-card" aria-label="Email Sammi">
+          <div class="contact-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <span class="contact-card-label">Email</span>
+          <span class="contact-card-name" style="font-size: clamp(13px, 1.6vw, 20px); word-break: break-all;">vibewithsammi@gmail.com</span>
+          <p class="contact-card-sub">Collaborations, bookings, or just want to say hey — slide into the inbox.</p>
+          <span class="contact-card-cta">
+            Send a message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </span>
+        </a>
+
+        <a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener" class="contact-card" aria-label="Follow Sammi on Instagram">
+          <div class="contact-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </div>
+          <span class="contact-card-label">Instagram</span>
+          <span class="contact-card-name">@vibewithsammi</span>
+          <p class="contact-card-sub">Day-to-day moments, photography, behind-the-scenes, and Atlanta life.</p>
+          <span class="contact-card-cta">
+            Follow along
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </span>
+        </a>
+
+        <a href="https://www.tiktok.com/@vibewithsammii" target="_blank" rel="noopener" class="contact-card" aria-label="Follow Sammi on TikTok">
+          <div class="contact-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06Z"/>
+            </svg>
+          </div>
+          <span class="contact-card-label">TikTok</span>
+          <span class="contact-card-name">@vibewithsammii</span>
+          <p class="contact-card-sub">Tech, design, creative experiments, and real life — watch it unfold on TikTok.</p>
+          <span class="contact-card-cta">
+            Watch it unfold
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h3>Vibe With <span>Sammi</span></h3>
+          <p>Designer. Photographer. Creator.</p>
+          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px; padding:10px 22px;">Say Hello</a>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Floye Creative Co.</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vibewithsammii" target="_blank" rel="noopener">TikTok</a></li>
+            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Sammi Oyeniyi · Vibe With Sammi. All rights reserved.</p>
+        <p>Made with intention in Atlanta, GA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const nav = document.getElementById('main-nav');
+      let lastY = 0, ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            const y = window.scrollY;
+            if (y < 60) {
+              nav.classList.remove('nav-hidden', 'nav-visible', 'nav-top');
+            } else if (y > lastY) {
+              nav.classList.add('nav-hidden');
+              nav.classList.remove('nav-visible');
+            } else {
+              nav.classList.remove('nav-hidden');
+              nav.classList.add('nav-visible');
+            }
+            lastY = y; ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      const toggle = document.getElementById('nav-toggle');
+      const drawer = document.getElementById('nav-drawer');
+      if (toggle && drawer) {
+        toggle.addEventListener('click', function () {
+          const isOpen = drawer.classList.toggle('open');
+          toggle.classList.toggle('open', isOpen);
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        drawer.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            drawer.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && drawer.classList.contains('open')) {
+            drawer.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            toggle.focus();
+          }
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
