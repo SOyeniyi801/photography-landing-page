@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Caught Ya! — Vibe With Sammi</title>
+  <meta name="description" content="Sammi snapped a photo of you. Find your event gallery here." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body { padding-top: 0; min-height: 100svh; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .caught-hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .caught-hero::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(200,150,12,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .caught-wordmark {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,247,237,0.4);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .caught-wordmark span { color: var(--gold); }
+
+    .caught-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .caught-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 16vw, 100px);
+      letter-spacing: 0.04em;
+      line-height: 0.88;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+    .caught-hero h1 span { color: var(--gold); }
+
+    .caught-sub {
+      font-size: 16px;
+      color: var(--slate);
+      max-width: 400px;
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .caught-scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(175,194,213,0.3);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .caught-scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, rgba(175,194,213,0.3), transparent);
+    }
+
+    /* ── EVENTS SECTION ───────────────────────────── */
+    .caught-events {
+      padding: 64px 0;
+      background: var(--card-bg);
+      border-top: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .caught-events-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .caught-events h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 7vw, 48px);
+      letter-spacing: 0.04em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 36px;
+    }
+
+    /* Compact stacking event cards */
+    .caught-event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .caught-event-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--navy);
+      border: 1px solid rgba(175,194,213,0.1);
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .caught-event-card:hover {
+      border-color: rgba(200,150,12,0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Square thumbnail — small, fixed */
+    .caught-event-thumb {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(135deg, #0D1E30, #12385C);
+    }
+
+    .caught-event-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .caught-event-thumb .thumb-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(175,194,213,0.2);
+    }
+
+    /* Text block */
+    .caught-event-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .caught-event-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .caught-event-tag {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .caught-event-date {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .caught-event-body h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .caught-event-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Arrow on the right */
+    .caught-event-arrow {
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .caught-event-card:hover .caught-event-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    /* ── WHILE YOU'RE HERE ────────────────────────── */
+    .caught-links {
+      padding: 64px 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .caught-links h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 7vw, 48px);
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 36px;
+    }
+
+    .caught-link-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .caught-link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(175,194,213,0.07);
+      text-decoration: none;
+      color: inherit;
+      gap: 16px;
+      transition: padding-left 0.2s;
+    }
+    .caught-link-item:first-child { border-top: 1px solid rgba(175,194,213,0.07); }
+    .caught-link-item:hover { padding-left: 6px; }
+
+    .caught-link-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .caught-link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .caught-link-text strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .caught-link-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .caught-link-arrow {
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .caught-link-item:hover .caught-link-arrow { transform: translate(3px, -3px); }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    .caught-footer {
+      background: #04090F;
+      border-top: 1px solid rgba(175,194,213,0.07);
+      padding: 24px 0;
+    }
+    .caught-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .caught-footer p {
+      font-size: 11px;
+      color: rgba(175,194,213,0.25);
+      letter-spacing: 0.05em;
+    }
+    .caught-footer a {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── MOBILE FIRST ─────────────────────────────── */
+    @media (max-width: 480px) {
+      .caught-hero { padding: 80px 20px 56px; }
+      .caught-hero h1 { font-size: clamp(56px, 18vw, 80px); }
+      .caught-sub { font-size: 15px; }
+
+      .caught-events,
+      .caught-links { padding: 48px 0; }
+
+      .caught-event-thumb { width: 68px; height: 68px; }
+      .caught-event-body h3 { font-size: 18px; }
+      .caught-event-body p { font-size: 12px; }
+
+      .caught-link-icon { width: 36px; height: 36px; }
+      .caught-link-text strong { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="caught-hero" aria-label="I caught ya">
+
+    <a href="index.html" class="caught-wordmark">Vibe With <span>Sammi</span></a>
+
+    <div class="caught-icon" aria-hidden="true">📸</div>
+
+    <h1>I Caught<br><span>Ya!</span></h1>
+
+    <p class="caught-sub">
+      If I handed you this card, chances are I snapped a photo of you.
+      Check the galleries below to find your moment.
+    </p>
+
+    <a href="#events" class="btn btn-gold">Find Your Photos</a>
+
+    <div class="caught-scroll-hint" aria-hidden="true">Scroll</div>
+
+  </section>
+
+  <!-- RECENT EVENTS -->
+  <section class="caught-events" id="events" aria-labelledby="events-heading">
+    <div class="container">
+      <span class="caught-events-label">Recent Shoots</span>
+      <h2 id="events-heading">Were you here?</h2>
+
+      <div class="caught-event-list">
+
+        <!-- Event 1 — Tennis on the Block -->
+        <a href="https://drive.google.com/placeholder-tennis" target="_blank" rel="noopener" class="caught-event-card" aria-label="Tennis on the Block gallery">
+          <div class="caught-event-thumb">
+            
+              <img src="assets/IMG_1094.jpg" alt="a woman hitting a tennis ball" />
+           
+            <div class="thumb-ph">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+          </div>
+          <div class="caught-event-body">
+            <div class="caught-event-meta">
+              <span class="caught-event-tag">June 2026</span>
+            </div>
+            <h3>Tennis on the Block</h3>
+            <p>Community tennis in Atlanta. Tap to find your photo.</p>
+          </div>
+          <svg class="caught-event-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+
+        <!-- Event 2 -->
+        <a href="https://drive.google.com/placeholder-controllerise" target="_blank" rel="noopener" class="caught-event-card" aria-label="Beats on the Block gallery">
+          <div class="caught-event-thumb">
+            
+          
+              <img src="assets/IMG_1772.jpg" alt="Two people walking at an event" />
+           
+            <div class="thumb-ph">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+          </div>
+          <div class="caught-event-body">
+            <div class="caught-event-meta">
+              <span class="caught-event-tag">June 2026</span>
+            </div>
+            <h3>Controllerise 6.1</h3>
+            <p>Atlanta gaming night. Tap to find your photo.</p>
+          </div>
+          <svg class="caught-event-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHILE YOU'RE HERE -->
+  <section class="caught-links" aria-labelledby="links-heading">
+    <div class="container">
+      <h2 id="links-heading">While you're here...</h2>
+
+      <div class="caught-link-list">
+
+        <a href="photography.html" class="caught-link-item">
+          <div class="caught-link-left">
+            <div class="caught-link-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <div class="caught-link-text">
+              <strong>Browse My Work</strong>
+              <span>Photography portfolio and event galleries</span>
+            </div>
+          </div>
+          <svg class="caught-link-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+
+        <a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener" class="caught-link-item">
+          <div class="caught-link-left">
+            <div class="caught-link-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="caught-link-text">
+              <strong>Follow on Instagram</strong>
+              <span>@vibewithsammi</span>
+            </div>
+          </div>
+          <svg class="caught-link-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+
+        <a href="contact.html" class="caught-link-item">
+          <div class="caught-link-left">
+            <div class="caught-link-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="caught-link-text">
+              <strong>Need Event Coverage?</strong>
+              <span>Let's connect</span>
+            </div>
+          </div>
+          <svg class="caught-link-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="caught-footer">
+    <div class="container caught-footer-inner">
+      <p>© 2026 Sammi Oyeniyi · Vibe With Sammi</p>
+      <a href="index.html">Back to Site</a>
+    </div>
+  </footer>
+
+</body>
+</html>
