@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakoufet World Cup Watch Party — Vibe With Sammi</title>
+  <meta name="description" content="Haiti came to Atlanta for the World Cup and partied in the Lakou. A story by Sammi Oyeniyi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── STORY PAGE ───────────────────────────────── */
+    .story-hero {
+      padding: 140px 0 60px;
+      border-bottom: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .story-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .story-hero-eyebrow a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .story-hero-eyebrow a:hover { color: var(--gold); }
+
+    .story-hero-eyebrow span {
+      color: rgba(175,194,213,0.2);
+      font-size: 12px;
+    }
+
+    .story-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 7vw, 80px);
+      letter-spacing: 0.03em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .story-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .story-hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    /* ── STORY CONTENT ────────────────────────────── */
+    .story-content {
+      padding: 72px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── STORY OPENING BLOCK ──────────────────────── */
+
+    .story-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.07);
+    }
+    .story-img img { width: 100%; height: auto; display: block; }
+    .story-img .img-ph {
+      width: 100%; aspect-ratio: 4/3;
+      background: linear-gradient(160deg, #0D1E30, #12385C);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(175,194,213,0.15);
+    }
+
+    /* Row 1: image LEFT, big headline RIGHT */
+    .story-row-1 {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .story-row-1 .story-img { flex: 0 0 42%; }
+    .story-row-1 .story-col-right { flex: 1; }
+
+    .story-opening-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 3.5vw, 48px);
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+      color: var(--cream);
+    }
+
+    /* Row 2: paragraph LEFT, image RIGHT */
+    .story-row-2 {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .story-row-2 .story-col-left { flex: 1; }
+    .story-row-2 .story-img { flex: 0 0 42%; }
+
+    .story-caption {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.8;
+    }
+
+    /* Mobile: everything stacks, title first */
+    @media (max-width: 680px) {
+      .story-row-1,
+      .story-row-2 {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Row 1 mobile: title → image */
+      .story-row-1 .story-col-right { order: -1; }
+      .story-row-1 .story-img       { flex: none; width: 100%; }
+
+      /* Row 2 mobile: caption → image */
+      .story-row-2 .story-col-left { order: -1; }
+      .story-row-2 .story-img      { flex: none; width: 100%; }
+
+      .story-split { grid-template-columns: 1fr; }
+      .story-split.reverse { direction: ltr; }
+      .story-strip-item { width: 140px; }
+      .story-content { padding: 48px 0; }
+    }
+
+    /* Full paragraph blocks */
+    .story-paragraph {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--slate);
+      margin-bottom: 32px;
+    }
+
+    .story-paragraph + .story-paragraph { margin-top: 0; }
+
+    /* Image + text side blocks */
+    .story-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin: 40px 0;
+    }
+
+    .story-split.reverse { direction: rtl; }
+    .story-split.reverse > * { direction: ltr; }
+
+    .story-split-text {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--slate);
+    }
+
+    /* Pull quote */
+    .story-quote {
+      border-left: 3px solid var(--gold);
+      padding: 20px 28px;
+      margin: 40px 0;
+      background: var(--card-bg);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .story-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--cream);
+      line-height: 1.5;
+    }
+
+    /* Horizontal thumbnail strip (scrollable) */
+    .story-strip {
+      margin: 48px 0;
+      overflow: hidden;
+    }
+
+    .story-strip-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .story-strip-track {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+    }
+    .story-strip-track::-webkit-scrollbar { display: none; }
+
+    .story-strip-item {
+      flex: 0 0 auto;
+      width: 180px;
+      aspect-ratio: 3/2;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.07);
+    }
+    .story-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-strip-item .strip-ph {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #0D1E30, #12385C);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(175,194,213,0.15);
+    }
+
+    /* Divider */
+    .story-divider {
+      width: 44px;
+      height: 2px;
+      background: var(--gold);
+      margin: 40px 0;
+    }
+
+    /* Footer links */
+    .story-footer-links {
+      padding: 40px 0 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .story-footer-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .story-footer-link a { color: var(--gold); text-decoration: underline; }
+    .story-footer-link a:hover { color: var(--gold-lt); }
+
+    /* ── STORY OPENING BLOCK ──────────────────────── */
+
+    /* Desktop: image left column, everything right */
+    .story-opening {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+
+    /* Left image — taller portrait feel */
+    .story-opening .story-img {
+      width: 100%;
+    }
+    .story-opening .story-img .img-ph {
+      aspect-ratio: 2/3;
+    }
+
+    /* Right column: headline at top, then second image + caption side by side */
+    .story-opening-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .story-opening-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(24px, 3.5vw, 40px);
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      color: var(--cream);
+    }
+
+    /* Second image + caption sit side by side */
+    .story-opening-pair {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .story-opening-pair .story-img .img-ph {
+      aspect-ratio: 3/4;
+    }
+
+    .story-caption {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER CALLOUT LINKS ─────────────────────── */
+    .story-footer-links {
+      padding: 40px 0 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .story-footer-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    .story-footer-link svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--gold);
+    }
+
+    .story-footer-link span { flex: 1; }
+
+    .story-footer-link a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .story-footer-link a:hover { color: var(--gold-lt); }
+
+
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Vibe With <span>Sammi</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+        <li><a href="content.html">Content</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+      <li><a href="content.html">Content</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-meta">
+      <p>Atlanta, GA</p>
+      <a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- STORY HERO -->
+  <header class="story-hero">
+    <div class="container">
+      <div class="story-hero-eyebrow">
+        <a href="publications.html">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          All Stories
+        </a>
+        <span>/</span>
+        <span class="section-label" style="margin:0;">Event</span>
+      </div>
+      <h1>Lakoufet World Cup<br>Watch Party</h1>
+      <p class="story-hero-subtitle">Behind the lens</p>
+      <p class="story-hero-sub">
+        A Haitian world cup festival celebrating music, food, culture, community,
+        and Haiti's historic return to the World Cup.
+      </p>
+    </div>
+  </header>
+
+  <!-- STORY BODY -->
+  <article class="story-content">
+    <div class="container">
+
+      <!-- Row 1: image left, big headline right -->
+      <div class="story-row-1">
+        <div class="story-img">
+          <!-- Replace: <img src="assets/lakoufet-1.jpg" alt="Lakoufet event scene" /> -->
+          <div class="img-ph">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+        </div>
+        <div class="story-col-right">
+          <h2 class="story-opening-headline">Haiti came to Atlanta for the World Cup and partied in the Lakou!</h2>
+        </div>
+      </div>
+
+      <!-- Row 2: paragraph left, image right -->
+      <div class="story-row-2">
+        <div class="story-col-left">
+          <p class="story-caption">
+            Lakoufet is a Haitian world cup festival celebrating music, food,
+            culture, community and Haiti's historic return to the world cup.
+          </p>
+        </div>
+        <div class="story-img">
+          <!-- Replace: <img src="assets/lakoufet-2.jpg" alt="Crowd at Lakoufet" /> -->
+          <div class="img-ph"></div>
+        </div>
+      </div>
+
+      <!-- Body paragraph -->
+      <p class="story-paragraph">
+        Hosted by Lakou at the Westside Motor Lounge, this event brought together
+        Haitians and soccer fans alike to witness the historic return of Haiti to the World Cup.
+      </p>
+
+      <!-- Split: image left, text right -->
+      <div class="story-split">
+        <div class="story-img">
+          <!-- <img src="assets/lakoufet-3.jpg" alt="Performers at Lakoufet" /> -->
+          <div class="img-ph" style="aspect-ratio:4/3;"></div>
+        </div>
+        <div class="story-split-text">
+          <p>
+            It was not only just a watch party. Lakou brought out the biggest names in Haitian music.
+            Rich Cave, Eyo-e, 5Lan, Jperry and T-vice headlined the festival.
+          </p>
+          <p style="margin-top:16px;">
+            Haitian DJs Unruley, Kash, Magic Kenny, Flockaland, and others kept the vibes
+            going throughout the day.
+          </p>
+        </div>
+      </div>
+
+      <!-- Split: text left, image right -->
+      <div class="story-split reverse">
+        <div class="story-img">
+          <!-- <img src="assets/lakoufet-4.jpg" alt="Haiti scores" /> -->
+          <div class="img-ph" style="aspect-ratio:4/3;"></div>
+        </div>
+        <div class="story-split-text">
+          <p>The historic moment where Haiti scored for a 2nd time!</p>
+        </div>
+      </div>
+
+      <!-- Photo strip -->
+      <div class="story-strip">
+        <span class="story-strip-label">From the Gallery</span>
+        <div class="story-strip-track">
+          <!--
+            Replace each .strip-ph with:
+            <img src="assets/lakoufet-gallery-1.jpg" alt="Description" />
+          -->
+          <div class="story-strip-item"><div class="strip-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div>
+          <div class="story-strip-item"><div class="strip-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div>
+          <div class="story-strip-item"><div class="strip-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div>
+          <div class="story-strip-item"><div class="strip-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div>
+        </div>
+      </div>
+
+      <div class="story-divider" aria-hidden="true"></div>
+
+      <!-- Footer links -->
+      <div class="story-footer-links">
+        <div class="story-footer-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <span>View the full gallery from the event <a href="https://drive.google.com/placeholder-lakoufet" target="_blank" rel="noopener">here</a></span>
+        </div>
+        <div class="story-footer-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span>Check out Lakoufet on <a href="https://instagram.com/lakou.atl" target="_blank" rel="noopener">Instagram</a> to learn more about the community.</span>
+        </div>
+        <a href="publications.html" class="btn btn-ghost" style="margin-top:8px; width:fit-content;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to All Stories
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h3>Vibe With <span>Sammi</span></h3>
+          <p>Designer. Photographer. Creator.</p>
+          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px;padding:10px 22px;">Say Hello</a>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="publications.html">Stories</a></li>
+            <li><a href="content.html">Content</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vibewithsammii" target="_blank" rel="noopener">TikTok</a></li>
+            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Sammi Oyeniyi · Vibe With Sammi. All rights reserved.</p>
+        <p>Made with intention in Atlanta, GA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const nav = document.getElementById('main-nav');
+      let lastY = 0, ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            const y = window.scrollY;
+            if (y < 60) { nav.classList.remove('nav-hidden','nav-visible','nav-top'); }
+            else if (y > lastY) { nav.classList.add('nav-hidden'); nav.classList.remove('nav-visible'); }
+            else { nav.classList.remove('nav-hidden'); nav.classList.add('nav-visible'); }
+            lastY = y; ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      const toggle = document.getElementById('nav-toggle');
+      const drawer = document.getElementById('nav-drawer');
+      if (toggle && drawer) {
+        toggle.addEventListener('click', function () {
+          const isOpen = drawer.classList.toggle('open');
+          toggle.classList.toggle('open', isOpen);
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        drawer.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            drawer.classList.remove('open'); toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded','false'); document.body.style.overflow = '';
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && drawer.classList.contains('open')) {
+            drawer.classList.remove('open'); toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded','false'); document.body.style.overflow = '';
+            toggle.focus();
+          }
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

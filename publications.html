@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stories — Vibe With Sammi</title>
+    <meta
+      name="description"
+      content="A spotlight on the events Sammi has covered. Stories, galleries, and community in Atlanta."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ── STORY CARDS GRID ─────────────────────────── */
+      .stories-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        margin-top: 56px;
+        border: 1px solid rgba(175, 194, 213, 0.1);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+
+      .story-card {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        background: var(--card-bg);
+        border-right: 1px solid rgba(175, 194, 213, 0.1);
+        border-bottom: 1px solid rgba(175, 194, 213, 0.1);
+        transition: background 0.2s;
+        position: relative;
+      }
+      .story-card:nth-child(3n) {
+        border-right: none;
+      }
+      .story-card:hover {
+        background: var(--navy);
+      }
+
+      /* Gold top accent on hover */
+      .story-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gold);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .story-card:hover::before {
+        opacity: 1;
+      }
+
+      .story-thumb {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: linear-gradient(135deg, #0d1e30, #12385c 50%, #07111f);
+        overflow: hidden;
+        position: relative;
+      }
+      .story-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+      .story-card:hover .story-thumb img {
+        transform: scale(1.04);
+      }
+      .story-thumb .story-ph {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(175, 194, 213, 0.15);
+      }
+
+      .story-body {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+        background: inherit;
+      }
+
+      .story-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .story-date {
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: var(--gold-dim);
+        padding: 3px 8px;
+        border-radius: 100px;
+      }
+
+      .story-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        color: var(--cream);
+        line-height: 1.1;
+      }
+
+      .story-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.65;
+        flex: 1;
+      }
+
+      .story-read {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+        transition: gap 0.2s;
+      }
+      .story-card:hover .story-read {
+        gap: 10px;
+      }
+
+      /* Placeholder "coming soon" card */
+      .story-card.story-soon {
+        opacity: 0.45;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      /* ── CTA BAND ─────────────────────────────────── */
+      .pub-cta {
+        margin-top: 80px;
+        padding: 56px;
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(175, 194, 213, 0.1);
+      }
+
+      .pub-cta h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(32px, 5vw, 52px);
+        letter-spacing: 0.04em;
+        color: var(--cream);
+        margin-bottom: 10px;
+        line-height: 0.95;
+      }
+
+      .pub-cta p {
+        font-size: 15px;
+        color: var(--muted);
+        max-width: 420px;
+        line-height: 1.7;
+        margin-bottom: 28px;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .stories-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .story-card:nth-child(3n) {
+          border-right: 1px solid rgba(175, 194, 213, 0.1);
+        }
+        .story-card:nth-child(2n) {
+          border-right: none;
+        }
+        .pub-cta {
+          padding: 36px 28px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .stories-grid {
+          grid-template-columns: 1fr;
+          border-radius: var(--radius);
+        }
+        .story-card {
+          border-right: none;
+        }
+        .story-card:nth-child(2n) {
+          border-right: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="main-nav" aria-label="Main navigation">
+      <div class="container">
+        <a href="index.html" class="nav-logo">Vibe With <span>Sammi</span></a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="photography.html">Photography</a></li>
+          <li>
+            <a
+              href="https://www.floyecreative.co/"
+              target="_blank"
+              rel="noopener"
+              >Design</a
+            >
+          </li>
+          <li><a href="content.html">Content</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="nav-drawer"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div
+      class="nav-drawer"
+      id="nav-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile navigation"
+    >
+      <ul role="list">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li>
+          <a href="https://www.floyecreative.co/" target="_blank" rel="noopener"
+            >Design</a
+          >
+        </li>
+        <li><a href="content.html">Content</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-drawer-meta">
+        <p>Atlanta, GA</p>
+        <a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a>
+      </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero" aria-labelledby="pub-page-title">
+      <div class="container">
+        <span class="section-label">The Work</span>
+        <div class="page-hero-line" aria-hidden="true"></div>
+        <h1 id="pub-page-title">
+          A Look
+          <span>Behind the lens</span>
+        </h1>
+        <p>
+          A spotlight on the events covered around Atlanta. Learn more about the
+          event, organizers, and how to stay connected to the community.
+        </p>
+      </div>
+    </header>
+
+    <!-- STORIES GRID -->
+    <section aria-labelledby="stories-heading" style="padding: 80px 0">
+      <div class="container">
+        <div class="stories-grid" role="list">
+          <!-- Story 1: Lakoufet — LIVE -->
+          <a
+            href="story-lakoufet.html"
+            class="story-card"
+            role="listitem"
+            aria-label="Read: Lakoufet World Cup Watch Party"
+          >
+            <div class="story-thumb">
+              <img
+                src="assets/lakou-fet/lakoufet-cover.png"
+                alt="Lakoufet event"
+              />
+            </div>
+            <div class="story-body">
+              <div class="story-meta">
+                <span class="story-date">June 24,2026</span>
+              </div>
+              <p class="story-title">Lakoufet World Cup Watch Party</p>
+              <p class="story-desc">
+                Haiti came to Atlanta for the World Cup and partied in the
+                Lakou. A celebration of music, food, culture, and Haiti's
+                historic return.
+              </p>
+              <span class="story-read">
+                Read Story
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+          </a>
+          <!-- Story -->
+          <a
+            href="story-lakoufet.html"
+            class="story-card"
+            role="listitem"
+            aria-label="Read: Ayiti Unplugged"
+          >
+            <div class="story-thumb">
+              <img src="assets/lakou-fet/unplugged-cover.jpg" alt="woman blowing fire" />
+            </div>
+            <div class="story-body">
+              <div class="story-meta">
+                <span class="story-date">June 23, 2026</span>
+              </div>
+              <p class="story-title">Ayiti Unplugged</p>
+              <p class="story-desc">
+                An initimate V.I.P evening celebrating Haitian arts and community held at the Retreat: TGS.
+              </p>
+              <span class="story-read">
+                Read Story
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Story 2 -->
+          <a
+            href="story-lakoufet.html"
+            class="story-card"
+            role="listitem"
+            aria-label="Read: Atlanta Beltline Festival"
+          >
+            <div class="story-thumb">
+              <img src="assets/19-IMG_3572.jpg" alt="busta rhymes on stage" />
+            </div>
+            <div class="story-body">
+              <div class="story-meta">
+                <span class="story-date">June 21, 2026</span>
+              </div>
+              <p class="story-title">Atlanta Beltline Festival</p>
+              <p class="story-desc">
+                Two day festival held on the new south path of the Beltline in
+                Pittsburg Yards. Filled with games, food and performances.
+              </p>
+              <span class="story-read">
+                Read Story
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Story -->
+          <a
+            href="story-lakoufet.html"
+            class="story-card"
+            role="listitem"
+            aria-label="Read: Lakoufet World Cup Watch Party"
+          >
+            <div class="story-thumb">
+              <img src="assets/IMG_3290.jpg" alt="Lakoufet event" />
+            </div>
+            <div class="story-body">
+              <div class="story-meta">
+                <span class="story-date">June 20, 2026</span>
+              </div>
+              <p class="story-title">Deyo - Haiti x Brazil Watch Party</p>
+              <p class="story-desc">
+                A Juneteenth block party held at The Interlock which doubled as A FIFA watch party sponsored by Lakoufet x Haiti Haus
+              </p>
+              <span class="story-read">
+                Read Story
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Story -->
+          <a
+          href="story-lakoufet.html"
+          class="story-card"
+          role="listitem"
+          aria-label="Read: Beats On the Block"
+        >
+          <div class="story-thumb">
+            <img src="assets/IMG_1481.JPG" alt="a crowd of people dancing in the park" />
+          </div>
+          <div class="story-body">
+            <div class="story-meta">
+              <span class="story-date">June 6, 2026</span>
+            </div>
+            <p class="story-title">Beats on the Block</p>
+            <p class="story-desc">
+              Formerly Beats on the Beltline, this EDM hangout event held in the Old Forth Ward Skate Park featured a diverse mix of beat makers.
+            </p>
+            <span class="story-read">
+              Read Story
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Story -->
+        <a
+        href="story-lakoufet.html"
+        class="story-card"
+        role="listitem"
+        aria-label="Read: Tennis on the Block"
+      >
+        <div class="story-thumb">
+          <img src="assets/IMG_1147.jpg" alt="two women playing tennis" />
+        </div>
+        <div class="story-body">
+          <div class="story-meta">
+            <span class="story-date">June 6, 2026</span>
+          </div>
+          <p class="story-title">Beats on the Block</p>
+          <p class="story-desc">
+            A community tennis event bringing Atlanta together on the courts. Candid moments, fashion, and good energy all around.
+          </p>
+          <span class="story-read">
+            Read Story
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </span>
+        </div>
+      </a>
+
+          </div>
+
+        <!-- CTA -->
+        <div class="pub-cta">
+          <h2>
+            Want to have your<br /><span class="accent">event covered?</span>
+          </h2>
+          <p>Reach out and let's talk. Event photography starting at $400.</p>
+          <a href="contact.html" class="btn btn-gold">Contact Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <h3>Vibe With <span>Sammi</span></h3>
+            <p>Designer. Photographer. Creator.</p>
+            <a
+              href="mailto:vibewithsammi@gmail.com"
+              class="btn btn-ghost"
+              style="font-size: 12px; padding: 10px 22px"
+              >Say Hello</a
+            >
+          </div>
+          <div class="footer-col">
+            <h4>Explore</h4>
+            <ul class="footer-links" role="list">
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="photography.html">Photography</a></li>
+              <li><a href="publications.html">Stories</a></li>
+              <li><a href="content.html">Content</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <ul class="footer-links" role="list">
+              <li>
+                <a
+                  href="https://instagram.com/vibewithsammi"
+                  target="_blank"
+                  rel="noopener"
+                  >Instagram</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.tiktok.com/@vibewithsammii"
+                  target="_blank"
+                  rel="noopener"
+                  >TikTok</a
+                >
+              </li>
+              <li>
+                <a href="mailto:vibewithsammi@gmail.com"
+                  >vibewithsammi@gmail.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Sammi Oyeniyi · Vibe With Sammi. All rights reserved.</p>
+          <p>Made with intention in Atlanta, GA.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.getElementById("main-nav");
+        let lastY = 0,
+          ticking = false;
+        window.addEventListener("scroll", function () {
+          if (!ticking) {
+            requestAnimationFrame(function () {
+              const y = window.scrollY;
+              if (y < 60) {
+                nav.classList.remove("nav-hidden", "nav-visible", "nav-top");
+              } else if (y > lastY) {
+                nav.classList.add("nav-hidden");
+                nav.classList.remove("nav-visible");
+              } else {
+                nav.classList.remove("nav-hidden");
+                nav.classList.add("nav-visible");
+              }
+              lastY = y;
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+        const toggle = document.getElementById("nav-toggle");
+        const drawer = document.getElementById("nav-drawer");
+        if (toggle && drawer) {
+          toggle.addEventListener("click", function () {
+            const isOpen = drawer.classList.toggle("open");
+            toggle.classList.toggle("open", isOpen);
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            document.body.style.overflow = isOpen ? "hidden" : "";
+          });
+          drawer.querySelectorAll("a").forEach(function (a) {
+            a.addEventListener("click", function () {
+              drawer.classList.remove("open");
+              toggle.classList.remove("open");
+              toggle.setAttribute("aria-expanded", "false");
+              document.body.style.overflow = "";
+            });
+          });
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && drawer.classList.contains("open")) {
+              drawer.classList.remove("open");
+              toggle.classList.remove("open");
+              toggle.setAttribute("aria-expanded", "false");
+              document.body.style.overflow = "";
+              toggle.focus();
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
