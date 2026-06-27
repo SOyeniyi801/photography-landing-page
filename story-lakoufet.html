@@ -67,7 +67,7 @@
     }
 
     .story-hero-intro {
-      font-size: 15px;
+      font-size: 24px;
       color: var(--slate);
       line-height: 1.8;
       max-width: 380px;
@@ -135,14 +135,7 @@
       border: 1px solid rgba(175,194,213,0.07);
     }
     .s-img img { width: 100%; height: auto; display: block; }
-    .s-img .ph {
-      width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(160deg, #0D1E30, #12385C);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(175,194,213,0.15);
-    }
-    .s-img .ph-tall { aspect-ratio: 3/4; }
-    .s-img .ph-sq   { aspect-ratio: 1; }
+    
 
     /* ── Block 1: wide image + pull quote + body ── */
     .s-block-1 {
@@ -165,7 +158,7 @@
     .s-quote {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(22px, 3vw, 34px);
+      font-size: clamp(24px, 3vw, 48px);
       color: var(--gold);
       line-height: 1.3;
       letter-spacing: 0.02em;
@@ -180,7 +173,7 @@
     }
 
     .s-body-text {
-      font-size: 15px;
+      font-size: 22px;
       color: var(--slate);
       line-height: 1.85;
     }
@@ -192,14 +185,15 @@
     }
 
     .s-two-col {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: start;
+}
 
     .s-caption {
-      font-size: 12px;
+      font-size: 20px;
       font-style: italic;
       color: var(--muted);
       line-height: 1.6;
@@ -418,6 +412,8 @@
       .s-block-3 { grid-template-columns: 1fr; gap: 24px; }
 
       .s-two-col { grid-template-columns: 1fr 1fr; }
+      .story-hero-intro { font-size: 16px;}
+      .s-body-text { font-size: 16px;}
 
       .gm-item--wide { width: 220px; height: 148px; }
       .gm-item--tall { width: 120px; height: 180px; }
@@ -485,9 +481,9 @@
         <h1>Lakoufet World Cup<br>Watch Party</h1>
         <p class="story-hero-subtitle">Behind the lens</p>
         <p class="story-hero-intro">
-          On a Sunday afternoon in Atlanta, hundreds of Haitians gathered to celebrate
+          On a Wednesday afternoon in Atlanta, hundreds of Haitians gathered to celebrate
           more than soccer. Lakoufet's World Cup Watch Party became a celebration of
-          culture, music, and one unforgettable victory as Haiti secured its return to the World Cup.
+          culture, music, and one unforgettable triumph as Haiti made history in the World Cup.
         </p>
       </div>
 
@@ -512,13 +508,10 @@
     </div>
 
     <div class="story-hero-right">
-      <!--
-        Replace with your best cover shot:
-        <img src="assets/lakoufet-cover.jpg" alt="Crowd at Lakoufet World Cup Watch Party" />
-      -->
-      <div class="img-ph">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      </div>
+      
+        <img src="assets/lakou-fet/lakoufet-cover.jpg" alt="Crowd at Lakoufet World Cup Watch Party" />
+     
+     
     </div>
 
   </header>
@@ -532,8 +525,7 @@
       <!-- Block 1: wide image left + pull quote + body right -->
       <div class="s-block-1">
         <div class="s-img">
-          <!-- <img src="assets/lakoufet-crowd.jpg" alt="Crowd celebrating at Lakoufet" /> -->
-          <div class="ph"></div>
+          <img src="assets/lakou-fet/lakoufet-pb-3.jpg" alt="Crowd celebrating at Lakoufet" />
         </div>
         <div class="s-block-1-right">
           <p class="s-quote">When Haiti scored the second goal, the entire venue erupted.</p>
@@ -549,12 +541,10 @@
       <div class="s-block-2">
         <div class="s-two-col">
           <div class="s-img">
-            <!-- <img src="assets/lakoufet-flags.jpg" alt="Fans waving Haitian flags" /> -->
-            <div class="ph"></div>
+            <img src="assets/lakou-fet/lakoufet-pb-1.jpg" alt="Fans waving Haitian flags" />
           </div>
           <div class="s-img">
-            <!-- <img src="assets/lakoufet-dj.jpg" alt="DJ at Lakoufet" /> -->
-            <div class="ph"></div>
+            <img src="assets/lakou-fet/lakoufet-pb-5.jpg" alt="fans dancing at Lakoufet" />
           </div>
         </div>
         <p class="s-caption">A sea of blue and red. Flags waving. Music shaking the walls. Pride in every chant.</p>
@@ -563,12 +553,11 @@
       <!-- Block 3: pull quote left + portrait center + body text right -->
       <div class="s-block-3">
         <div class="s-block-3-quote">
-          <p class="s-quote" style="font-size: clamp(20px, 2.5vw, 28px);">For one afternoon, Atlanta felt like Port-au-Prince.</p>
+          <p class="s-quote">For one afternoon, Atlanta felt like Port-au-Prince.</p>
           <div class="s-quote-divider"></div>
         </div>
         <div class="s-img">
-          <!-- <img src="assets/lakoufet-performer.jpg" alt="Performer at Lakoufet" /> -->
-          <div class="ph ph-tall"></div>
+          <img src="assets/lakou-fet/lakoufet-pb-4.jpg" alt="Performer at Lakoufet" />
         </div>
         <div>
           <p class="s-body-text">
@@ -585,11 +574,10 @@
       <!-- Block 4: image left + highlight text right -->
       <div class="s-block-4">
         <div class="s-img">
-          <!-- <img src="assets/lakoufet-goal.jpg" alt="Crowd reacting to Haiti's second goal" /> -->
-          <div class="ph"></div>
+          <img src="assets/lakou-fet/lakoufet-pb-2.jpg" alt="Crowd reacting to Haiti's second goal" />
         </div>
         <div>
-          <p class="s-highlight-heading">The historic moment where Haiti scored for a 2nd time!</p>
+          <p class="s-quote">The historic moment where Haiti scored for a 2nd time!</p>
           <div class="s-quote-divider" style="margin-bottom:20px;"></div>
           <p class="s-body-text">
             Cheers. Tears. Strangers hugging like family.
@@ -622,26 +610,21 @@
           -->
 
           <div class="gm-item gm-item--wide">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          </div>
+            <img src="assets/lakou-fet/lakoufet-pb-6.jpg" alt="rich cave singing at lakoufet" /> </div>
           <div class="gm-item gm-item--tall">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          </div>
-          <div class="gm-item gm-item--sq">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+           <img src="assets/lakou-fet/lakoufet-pb-7.jpg" alt="a man standing in the crowd">
           </div>
           <div class="gm-item gm-item--wide">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          </div>
-          <div class="gm-item gm-item--tall">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          </div>
-          <div class="gm-item gm-item--sq">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            <img src="assets/lakou-fet/lakoufet-pb-8.jpg" alt="performer 5lan on stage">
           </div>
           <div class="gm-item gm-item--wide">
-            <div class="gm-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+           <img src="assets/lakou-fet/lakoufet-pb-9.jpg" alt="crowd cheering">
           </div>
+          <div class="gm-item gm-item--tall">
+            <img src="assets/lakou-fet/lakoufet-pb-10.jpg" alt="man holding large haitian flag">
+          </div>
+         
+          
 
         </div>
         <!-- JS duplicates track for seamless loop — no restart -->
@@ -657,11 +640,11 @@
       <div class="story-footer-links">
         <div class="story-footer-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          <span>View the full gallery from the event <a href="https://drive.google.com/placeholder-lakoufet" target="_blank" rel="noopener">here</a></span>
+          <span>View the full gallery from the event <a href="https://drive.google.com/drive/folders/1ZoPEOFxlAivjZGJ483pMSetIMefDseDT?usp=drive_link" target="_blank" rel="noopener">here</a></span>
         </div>
         <div class="story-footer-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          <span>Follow Lakoufet on <a href="https://instagram.com/lakou.atl" target="_blank" rel="noopener">Instagram</a> to learn more about the community.</span>
+          <span>Follow Lakoufet on <a href="https://www.instagram.com/lakoufet/" target="_blank" rel="noopener">Instagram</a> to learn more about the community.</span>
         </div>
         <a href="publications.html" class="btn btn-ghost" style="width:fit-content; margin-top:8px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>

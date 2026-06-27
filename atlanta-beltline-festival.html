@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakoufet World Cup Watch Party — Vibe With Sammi</title>
+  <meta name="description" content="Haiti came to Atlanta for the World Cup and partied in the Lakou. A story by Sammi Oyeniyi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ══════════════════════════════════════════════
+       STORY HERO — full bleed, text over image
+       ══════════════════════════════════════════════ */
+    .story-hero {
+      position: relative;
+      min-height: 90svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    /* Left: text panel */
+    .story-hero-left {
+      position: relative;
+      z-index: 2;
+      background: var(--navy);
+      padding: 140px 56px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .story-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .story-breadcrumb a { color: var(--muted); transition: color 0.15s; }
+    .story-breadcrumb a:hover { color: var(--gold); }
+    .story-breadcrumb span { color: rgba(175,194,213,0.2); }
+
+    .story-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 6vw, 88px);
+      letter-spacing: 0.03em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+
+    .story-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .story-hero-intro {
+      font-size: 24px;
+      color: var(--slate);
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    /* Meta row */
+    .story-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(175,194,213,0.1);
+    }
+
+    .story-meta-item label {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .story-meta-item p {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.4;
+    }
+
+    /* Right: full bleed cover image */
+    .story-hero-right {
+      position: relative;
+      background: var(--card-bg);
+      overflow: hidden;
+    }
+
+    .story-hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .story-hero-right .img-ph {
+      width: 100%; height: 100%; min-height: 500px;
+      background: linear-gradient(160deg, #12385C 0%, #0D1E30 60%, #07111F 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(175,194,213,0.15);
+    }
+
+    /* ══════════════════════════════════════════════
+       STORY BODY
+       ══════════════════════════════════════════════ */
+    .story-body {
+      padding: 80px 0;
+    }
+
+    /* Shared image styles */
+    .s-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.07);
+    }
+    .s-img img { width: 100%; height: auto; display: block; }
+    
+
+    /* ── Block 1: wide image + pull quote + body ── */
+    .s-block-1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .s-block-1 .ph { aspect-ratio: 4/3; }
+
+    .s-block-1-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Pull quote */
+    .s-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(24px, 3vw, 48px);
+      color: var(--gold);
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+    }
+    .s-quote::before { content: '\201C'; }
+    .s-quote::after  { content: '\201D'; }
+
+    .s-quote-divider {
+      width: 36px; height: 2px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    .s-body-text {
+      font-size: 22px;
+      color: var(--slate);
+      line-height: 1.85;
+    }
+    .s-body-text + .s-body-text { margin-top: 16px; }
+
+    /* ── Block 2: two images side by side + caption ── */
+    .s-block-2 {
+      margin-bottom: 16px;
+    }
+
+    .s-two-col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: start;
+}
+
+    .s-caption {
+      font-size: 20px;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+      padding: 8px 0 40px;
+    }
+
+    /* ── Block 3: pull quote left + image + text right ── */
+    .s-block-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .s-block-3-quote {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ── Block 4: image left + highlighted text right ── */
+    .s-block-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .s-highlight-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(22px, 2.8vw, 32px);
+      color: var(--gold);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    /* ══════════════════════════════════════════════
+       GALLERY MARQUEE — seamless infinite loop
+       ══════════════════════════════════════════════ */
+    .story-gallery {
+      padding: 48px 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+      overflow: hidden;
+    }
+
+    .story-gallery-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      padding: 0 24px;
+    }
+
+    .gallery-marquee-stage {
+      overflow: hidden;
+      --gm-dur: 30s;
+    }
+
+    .gallery-marquee-stage:hover .gallery-marquee-track {
+      animation-play-state: paused;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-marquee-track { animation: none !important; }
+      .gallery-marquee-row   { overflow-x: auto; }
+    }
+
+    .gallery-marquee-row {
+      display: flex;
+      width: max-content;
+    }
+
+    .gallery-marquee-track {
+      display: flex;
+      gap: 12px;
+      padding-right: 12px; /* matches gap so seam is invisible */
+      animation: gm-scroll var(--gm-dur) linear infinite;
+    }
+
+    @keyframes gm-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .gm-item {
+      flex: 0 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .gm-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gm-item .gm-ph {
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #0D1E30, #12385C);
+      color: rgba(175,194,213,0.15);
+    }
+
+    /* Mix portrait and landscape sizes */
+    .gm-item--wide { width: 300px; height: 200px; }
+    .gm-item--tall { width: 160px; height: 240px; }
+    .gm-item--sq   { width: 200px; height: 200px; }
+
+    .gm-item .gm-ph { width: 100%; height: 100%; }
+
+    /* ══════════════════════════════════════════════
+       FOOTER LINKS
+       ══════════════════════════════════════════════ */
+    .story-footer-links {
+      padding: 48px 0 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .story-footer-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    .story-footer-link svg { flex-shrink: 0; margin-top: 3px; color: var(--gold); }
+    .story-footer-link span { flex: 1; }
+    .story-footer-link a { color: var(--gold); text-decoration: underline; }
+    .story-footer-link a:hover { color: var(--gold-lt); }
+
+    /* ══════════════════════════════════════════════
+       LIGHTBOX
+       ══════════════════════════════════════════════ */
+    #story-lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(4,9,15,0.96);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 24px;
+    }
+    #story-lightbox.open { opacity: 1; pointer-events: all; }
+
+    #story-lb-img {
+      display: block;
+      max-width: 100%; max-height: 90svh;
+      border-radius: var(--radius);
+      object-fit: contain;
+      transform: scale(0.94);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+    #story-lightbox.open #story-lb-img { transform: scale(1); }
+
+    #story-lb-close {
+      position: fixed; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(175,194,213,0.12);
+      border: 1px solid rgba(175,194,213,0.2);
+      color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10001;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #story-lb-close:hover { background: rgba(175,194,213,0.22); transform: rotate(90deg); }
+
+    .story-lb-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(175,194,213,0.1);
+      border: 1px solid rgba(175,194,213,0.18);
+      color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10001;
+      transition: background 0.2s;
+    }
+    .story-lb-arrow:hover { background: rgba(175,194,213,0.22); }
+    #story-lb-prev { left: 16px; }
+    #story-lb-next { right: 16px; }
+
+    /* Clickable hint on gallery items */
+    .gm-item { cursor: pointer; position: relative; pointer-events: all; }
+    .gm-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(7,17,31,0);
+      transition: background 0.25s;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .gm-item:hover::after { background: rgba(7,17,31,0.2); }
+
+    @media (max-width: 560px) {
+      .story-lb-arrow { width: 40px; height: 40px; }
+      #story-lb-prev { left: 8px; }
+      #story-lb-next { right: 8px; }
+    }
+    @media (max-width: 900px) {
+      .story-hero { grid-template-columns: 1fr; min-height: auto; }
+      .story-hero-left { padding: 120px 32px 48px; }
+      .story-hero-right { min-height: 56vw; }
+      .story-meta-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .s-block-1,
+      .s-block-4 { grid-template-columns: 1fr; gap: 24px; }
+
+      .s-block-3 { grid-template-columns: 1fr; gap: 24px; }
+
+      .s-two-col { grid-template-columns: 1fr 1fr; }
+      .story-hero-intro { font-size: 16px;}
+      .s-body-text { font-size: 16px;}
+
+      .gm-item--wide { width: 220px; height: 148px; }
+      .gm-item--tall { width: 120px; height: 180px; }
+      .gm-item--sq   { width: 148px; height: 148px; }
+      .gallery-marquee-stage { --gm-dur: 22s; }
+    }
+
+    @media (max-width: 560px) {
+      .story-hero-left { padding: 100px 20px 40px; }
+      .story-meta-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .s-body { padding: 48px 0; }
+      .s-two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Vibe With <span>Sammi</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+        <li><a href="content.html">Content</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="https://www.floyecreative.co/" target="_blank" rel="noopener">Design</a></li>
+      <li><a href="content.html">Content</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-meta">
+      <p>Atlanta, GA</p>
+      <a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       STORY HERO
+       ══════════════════════════════════════════════ -->
+  <header class="story-hero">
+
+    <div class="story-hero-left">
+      <div>
+        <div class="story-breadcrumb">
+          <a href="publications.html">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            All Stories
+          </a>
+          <span>/</span>
+          <span style="color:var(--gold); letter-spacing:0.18em;">Event</span>
+        </div>
+
+        <h1>Atlanta Beltline<br>Festival</h1>
+        <p class="story-hero-subtitle">Behind the lens</p>
+        <p class="story-hero-intro">
+          Atlanta Beltline Fest transformed Pittsburgh Yards into a global celebration of culture, community, and connection. Over two days, thousands gathered to watch World Cup matches, explore international cuisine, experience performances from around the world, and celebrate the opening of Pittsburgh Yards' newest Beltline connection.
+        </p>
+      </div>
+
+      <div class="story-meta-grid">
+        <div class="story-meta-item">
+          <label>Photography</label>
+          <p>Sammi Oyeniyi</p>
+        </div>
+        <div class="story-meta-item">
+          <label>Location</label>
+          <p>Atlanta, GA</p>
+        </div>
+        <div class="story-meta-item">
+          <label>Date</label>
+          <p>June 20, 2026</p>
+        </div>
+        <div class="story-meta-item">
+          <label>Category</label>
+          <p>Festival</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-hero-right">
+      
+        <img src="assets/atl-beltline-fest/beltline-fest-4.jpg" alt="woman dancing in a field" />
+     
+     
+    </div>
+
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       STORY BODY
+       ══════════════════════════════════════════════ -->
+  <div class="story-body">
+    <div class="container">
+
+      <!-- Block 1: wide image left + pull quote + body right -->
+      <div class="s-block-1">
+        <div class="s-img">
+          <img src="assets/atl-beltline-fest/andre-mayor.jpg" alt="Mayor Andre Dickens speaking on stage" />
+        </div>
+        <div class="s-block-1-right">
+          <p class="s-quote">We wanted to make sure the World Cup happened with Atlanta, not to Atlanta.</p>
+          <div class="s-quote-divider"></div>
+          <p class="s-body-text">
+            Atlanta Beltline Fest embodied that vision. Rather than centering the tournament inside the stadium alone, the festival extended the World Cup into Atlanta's neighborhoods—bringing together music, food, culture, and community at Pittsburgh Yards while celebrating the opening of its newest Beltline connection.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 2: two images side by side + caption -->
+      <div class="s-block-2">
+        <div class="s-two-col">
+          <div class="s-img">
+            <img src="assets/atl-beltline-fest/beltline-fest-5.jpg" alt="man standing in a crowd" />
+          </div>
+          <div class="s-img">
+            <img src="assets/atl-beltline-fest/beltline-fest-4.jpg" alt="woman dancing in a field" />
+          </div>
+        </div>
+        <p class="s-caption"> A weekend where every path led to music, food, and community.</p>
+      </div>
+
+      <!-- Block 3: pull quote left + portrait center + body text right -->
+      <div class="s-block-3">
+        <div class="s-block-3-quote">
+          <p class="s-quote">The evening moved to its own rhythm.”</p>
+          <div class="s-quote-divider"></div>
+        </div>
+        <div class="s-img">
+          <img src="assets/atl-beltline-fest/unruley-canterbery-tales.jpg" alt="Performer at Lakoufet" />
+        </div>
+        <div>
+          <p class="s-body-text">
+            DJ UnRuely and Canterbury Tales set the tone with their signature mashup styles, blending familiar classics with fresh, unexpected spins. The result was pure Atlanta: people from every walk of life dancing together, caught somewhere between nostalgia, rhythm, and discovery.
+          </p>
+          
+        </div>
+      </div>
+
+      <!-- Block 4: image left + highlight text right -->
+      <div class="s-block-4">
+        <div class="s-img">
+          <img src="assets/atl-beltline-fest/beltline-fest-9.jpg" alt="portrait of a man smiling" />
+        </div>
+        <div>
+          <p class="s-quote">Then Busta Rhymes took the stage.</p>
+          <div class="s-quote-divider" style="margin-bottom:20px;"></div>
+          <p class="s-body-text">
+            The energy reached another level when Busta Rhymes and Spliff Star hit the stage. For a moment, it felt like Atlanta had been transported back to the golden era of hip-hop. Together, they took the crowd on a journey through decades of music, with every song unlocking memories tied to a different chapter of life. Busta made sure to show love to our hometown of Brooklyn, New York, even shouting out the Knicks' championship run, drawing a roar from the New Yorkers in the crowd. And when it came time for his signature rapid-fire delivery, he didn't miss a beat, proving why he's remained one of hip-hop's most electrifying performers.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       GALLERY MARQUEE
+       ══════════════════════════════════════════════ -->
+  <div class="story-gallery" aria-label="Photo gallery from the event">
+    <p class="story-gallery-label container">From the Gallery</p>
+
+    <div class="gallery-marquee-stage" role="region" aria-label="Scrolling event photos">
+      <div class="gallery-marquee-row">
+        <div class="gallery-marquee-track" id="gm-track">
+
+          <!--
+            Replace each .gm-ph div with your actual images:
+            <img src="assets/lakoufet-g1.jpg" alt="Description" />
+
+            Use classes to vary shape:
+            gm-item--wide  (landscape)
+            gm-item--tall  (portrait)
+            gm-item--sq    (square)
+          -->
+
+          
+          <div class="gm-item gm-item--tall">
+           <img src="assets/atl-beltline-fest/beltline-fest-8.jpg" alt="busta rhymes standing on stage">
+          </div>
+          <div class="gm-item gm-item--tall">
+            <img src="assets/atl-beltline-fest/beltline-fest-2.jpg" alt="two men posing">
+           </div>
+          <div class="gm-item gm-item--tall">
+            <img src="assets/atl-beltline-fest/beltline-fest-1.jpg" alt="a man dancing in the crowd">
+           </div>
+          <div class="gm-item gm-item--tall">
+            <img src="assets/atl-beltline-fest/beltline-fest-7.jpg" alt="portrait of a man smiling">
+          </div>
+          <div class="gm-item gm-item--tall">
+           <img src="assets/atl-beltline-fest/beltline-fest-3.jpg" alt="two men posing and smiling">
+          </div>
+          <div class="gm-item gm-item--tall">
+            <img src="assets/atl-beltline-fest/beltline-fest-6.jpg" alt="women dancing in a crowd">
+          </div>
+         
+          
+
+        </div>
+        <!-- JS duplicates track for seamless loop — no restart -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER LINKS
+       ══════════════════════════════════════════════ -->
+  <div style="padding: 48px 0 80px;">
+    <div class="container">
+      <div class="story-footer-links">
+        <div class="story-footer-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <span>View the full gallery from the event <a href="https://drive.google.com/drive/folders/1ZfTpUamw9xWUd0rKk-GxTnKibHkvgLP3?usp=sharing" target="_blank" rel="noopener">here</a></span>
+        </div>
+        
+        <a href="publications.html" class="btn btn-ghost" style="width:fit-content; margin-top:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to All Stories
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h3>Vibe With <span>Sammi</span></h3>
+          <p>Designer. Photographer. Creator.</p>
+          <a href="mailto:vibewithsammi@gmail.com" class="btn btn-ghost" style="font-size:12px;padding:10px 22px;">Say Hello</a>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="publications.html">Stories</a></li>
+            <li><a href="content.html">Content</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vibewithsammii" target="_blank" rel="noopener">TikTok</a></li>
+            <li><a href="mailto:vibewithsammi@gmail.com">vibewithsammi@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Sammi Oyeniyi · Vibe With Sammi. All rights reserved.</p>
+        <p>Made with intention in Atlanta, GA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="story-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="story-lb-close" aria-label="Close photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="story-lb-arrow" id="story-lb-prev" aria-label="Previous photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img id="story-lb-img" src="" alt="" />
+    <button class="story-lb-arrow" id="story-lb-next" aria-label="Next photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <script>
+  (function () {
+    /* Nav */
+    const nav = document.getElementById('main-nav');
+    let lastY = 0, ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          const y = window.scrollY;
+          if (y < 60) { nav.classList.remove('nav-hidden','nav-visible','nav-top'); }
+          else if (y > lastY) { nav.classList.add('nav-hidden'); nav.classList.remove('nav-visible'); }
+          else { nav.classList.remove('nav-hidden'); nav.classList.add('nav-visible'); }
+          lastY = y; ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    /* Mobile drawer */
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('nav-drawer');
+    if (toggle && drawer) {
+      toggle.addEventListener('click', function () {
+        const isOpen = drawer.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          drawer.classList.remove('open'); toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false'); document.body.style.overflow = '';
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+          drawer.classList.remove('open'); toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false'); document.body.style.overflow = '';
+          toggle.focus();
+        }
+      });
+    }
+
+    /* Gallery marquee: duplicate track for seamless infinite loop */
+    const gmTrack = document.getElementById('gm-track');
+    if (gmTrack) {
+      const clone = gmTrack.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('id');
+      gmTrack.parentElement.appendChild(clone);
+    }
+
+    /* Lightbox for gallery marquee images */
+    const lb      = document.getElementById('story-lightbox');
+    const lbImg   = document.getElementById('story-lb-img');
+    const lbClose = document.getElementById('story-lb-close');
+    const lbPrev  = document.getElementById('story-lb-prev');
+    const lbNext  = document.getElementById('story-lb-next');
+    let lbItems = [], lbCurrent = 0;
+
+    function getLbItems() {
+      return Array.from(document.querySelectorAll('#gm-track .gm-item img'));
+    }
+
+    function openLb(idx) {
+      lbItems = getLbItems();
+      if (!lbItems.length) return;
+      lbCurrent = ((idx % lbItems.length) + lbItems.length) % lbItems.length;
+      lbImg.src = lbItems[lbCurrent].src;
+      lbImg.alt = lbItems[lbCurrent].alt || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+      lbPrev.style.opacity = lbItems.length > 1 ? '1' : '0';
+      lbNext.style.opacity = lbItems.length > 1 ? '1' : '0';
+    }
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Bind clicks directly to each original gm-item after DOM is ready */
+    document.querySelectorAll('#gm-track .gm-item').forEach(function (item, i) {
+      item.addEventListener('click', function () {
+        var img = item.querySelector('img');
+        if (!img || !img.src || img.src === window.location.href) return;
+        openLb(i);
+      });
+    });
+
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click', function () { openLb(lbCurrent - 1); });
+    lbNext.addEventListener('click', function () { openLb(lbCurrent + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  openLb(lbCurrent - 1);
+      if (e.key === 'ArrowRight') openLb(lbCurrent + 1);
+    });
+
+    let touchX = 0;
+    lb.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) openLb(lbCurrent + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+  })();
+  </script>
+
+</body>
+</html>
