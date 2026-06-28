@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work With Me — Sammi Oyeniyi</title>
+  <meta name="description" content="Book Sammi Oyeniyi for event photography, festival coverage, and recap videos in Atlanta, GA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { padding-top: 0; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .wwm-hero {
+      position: relative;
+      min-height: 60svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .wwm-hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .wwm-hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    .wwm-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(7,17,31,0.2) 0%,
+        rgba(7,17,31,0.5) 50%,
+        rgba(7,17,31,0.92) 85%,
+        rgba(7,17,31,1) 100%
+      );
+    }
+
+    .wwm-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 56px;
+      max-width: 720px;
+    }
+
+    .wwm-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .wwm-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 110px);
+      letter-spacing: 0.03em;
+      line-height: 0.88;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .wwm-hero-sub {
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    /* ── WHY SAMMI ────────────────────────────────── */
+    .wwm-why {
+      padding: 80px 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .wwm-why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .wwm-why-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 0.04em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .wwm-why-text h3 span { color: var(--gold); }
+
+    .wwm-why-text p {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .wwm-proof {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .wwm-proof-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid rgba(175,194,213,0.08);
+      border-left: 3px solid var(--gold);
+    }
+
+    .wwm-proof-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .wwm-proof-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .wwm-proof-text span {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── PHOTO STRIP ──────────────────────────────── */
+    .wwm-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 64px;
+    }
+
+    .wwm-strip-item {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+    }
+
+    .wwm-strip-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .wwm-strip-item:hover img { transform: scale(1.04); }
+
+    /* ── PACKAGES ─────────────────────────────────── */
+    .wwm-packages {
+      padding: 80px 0;
+      background: var(--card-bg);
+      border-top: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .wwm-packages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .wwm-package {
+      background: var(--navy);
+      border: 1px solid rgba(175,194,213,0.1);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wwm-package::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+
+    .wwm-package-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .wwm-package-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .wwm-package-price .amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .wwm-package-price .from {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .wwm-package-desc {
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 1.75;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .wwm-package-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .wwm-package-includes li {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.5;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .wwm-package-includes li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 6px; height: 1px;
+      background: var(--gold);
+    }
+
+    /* ── ADD-ONS ──────────────────────────────────── */
+    .wwm-addons {
+      margin-top: 48px;
+      padding: 40px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(175,194,213,0.08);
+    }
+
+    .wwm-addons h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+
+    .wwm-addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .wwm-addon {
+      padding: 20px;
+      background: var(--navy);
+      border-radius: var(--radius);
+      border: 1px solid rgba(175,194,213,0.08);
+    }
+
+    .wwm-addon-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .wwm-addon-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+
+    .wwm-addon-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .wwm-rates-note {
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── WEB DESIGN ───────────────────────────────── */
+    .wwm-web {
+      padding: 80px 0;
+      border-top: 1px solid rgba(175,194,213,0.07);
+    }
+
+    .wwm-web-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .wwm-web-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 4vw, 52px);
+      letter-spacing: 0.04em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .wwm-web-text h3 span { color: var(--gold); }
+
+    .wwm-web-text p {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .wwm-web-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .wwm-web-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+
+    .wwm-web-feature svg { flex-shrink: 0; color: var(--gold); margin-top: 2px; }
+
+    .wwm-bundle {
+      background: var(--card-bg);
+      border: 1px solid rgba(175,194,213,0.1);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wwm-bundle::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--gold), var(--gold-lt));
+    }
+
+    .wwm-bundle-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .wwm-bundle h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .wwm-bundle p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* ── CTA ──────────────────────────────────────── */
+    .wwm-cta {
+      padding: 100px 0;
+      background: var(--card-bg);
+      border-top: 1px solid rgba(175,194,213,0.07);
+      text-align: center;
+    }
+
+    .wwm-cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8vw, 96px);
+      letter-spacing: 0.03em;
+      line-height: 0.88;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .wwm-cta h2 span { color: var(--gold); }
+
+    .wwm-cta p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .wwm-cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .wwm-hero-content { padding: 48px 32px; }
+      .wwm-why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .wwm-strip { grid-template-columns: repeat(2, 1fr); }
+      .wwm-packages-grid { grid-template-columns: 1fr; }
+      .wwm-addons-grid { grid-template-columns: 1fr 1fr; }
+      .wwm-web-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 560px) {
+      .wwm-hero-content { padding: 40px 20px; }
+      .wwm-why, .wwm-packages, .wwm-web { padding: 56px 0; }
+      .wwm-strip { grid-template-columns: repeat(2, 1fr); }
+      .wwm-addons { padding: 28px 20px; }
+      .wwm-addons-grid { grid-template-columns: 1fr; }
+      .wwm-package { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="wwm-hero">
+    <div class="wwm-hero-bg">
+      <!--
+        Use a dynamic event shot here — crowd, energy, motion.
+        <img src="assets/lakou-fet/lakoufet-pb-3.jpg" alt="Event photography by Sammi Oyeniyi" />
+      -->
+      <img src="assets/lakou-fet/lakoufet-pb-3.jpg" alt="Event photography by Sammi Oyeniyi" />
+    </div>
+    <div class="wwm-hero-overlay"></div>
+    <div class="wwm-hero-content">
+      <span class="wwm-eyebrow">Sammi Shot That · Atlanta, GA</span>
+      <h1>Work<br>With Me</h1>
+      <p class="wwm-hero-sub">
+        Event and festival photography, social recap videos, and custom web design.
+        Let's make your event impossible to forget.
+      </p>
+    </div>
+  </div>
+
+  <!-- WHY SAMMI -->
+  <section class="wwm-why">
+    <div class="container">
+      <span class="wwm-eyebrow" style="color:var(--gold); font-size:10px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; display:block; margin-bottom:8px;">Why Book Me</span>
+      <div class="wwm-why-grid">
+        <div class="wwm-why-text">
+          <h3>You need someone who<br><span>gets the room.</span></h3>
+          <p>
+            I don't show up with a checklist. I show up knowing the energy of the space,
+            the people in it, and the moments worth capturing before they happen. That's
+            what 8 events in a month teaches you.
+          </p>
+          <p>
+            My background in design means I think about how images land on social, in press
+            kits, and in marketing materials. You get photos that work — not just photos
+            that look good on a hard drive.
+          </p>
+        </div>
+
+        <div class="wwm-proof">
+          <div class="wwm-proof-item">
+            <div class="wwm-proof-num">8</div>
+            <div class="wwm-proof-text">
+              <strong>Events shot this month</strong>
+              <span>Festivals, community events, nightlife, cultural celebrations</span>
+            </div>
+          </div>
+          <div class="wwm-proof-item">
+            <div class="wwm-proof-num">200+</div>
+            <div class="wwm-proof-text">
+              <strong>Professionally edited images delivered</strong>
+              <span>High-res, gallery-ready, social-optimized</span>
+            </div>
+          </div>
+          <div class="wwm-proof-item">
+            <div class="wwm-proof-num">2</div>
+            <div class="wwm-proof-text">
+              <strong>Official media passes</strong>
+              <span>Lakoufet World Cup Watch Party · Tennis on the Block, June 2026</span>
+            </div>
+          </div>
+          <div class="wwm-proof-item">
+            <div class="wwm-proof-num">900+</div>
+            <div class="wwm-proof-text">
+              <strong>Website visits in 3 days</strong>
+              <span>From business cards handed out at events</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-photo strip -->
+      <div class="wwm-strip">
+        <div class="wwm-strip-item">
+          <img src="assets/unplugged/ayiti-unplugged-11.jpg" alt="Event coverage" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/IMG_1618.JPG" alt="Festival photography" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/atl-beltline-fest/20-IMG_3574.jpg" alt="Candid event moment" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/IMG_1822.jpg" alt="Event atmosphere" />
+        </div>
+      </div>
+      <!-- strip two -->
+      <div class="wwm-strip">
+        <div class="wwm-strip-item">
+          <img src="assets/lakou-fet/lakoufet-pb-2.jpg" alt="woman waving a haitian flag" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/IMG_1571.jpg" alt="Festival photography" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/atl-beltline-fest/beltline-fest-5.jpg" alt="Candid event moment" />
+        </div>
+        <div class="wwm-strip-item">
+          <img src="assets/12-IMG_3832.jpg" alt="woman fire dancing" />
+        </div>
+      </div>
+      <div style="margin-top:40px;">
+        <a href="photography.html" class="btn btn-ghost">
+          View Full Portfolio
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES + RATES -->
+  <section class="wwm-packages">
+    <div class="container">
+      <span class="wwm-eyebrow" style="color:var(--gold); font-size:10px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; display:block; margin-bottom:8px;">Rates</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,5vw,64px); letter-spacing:0.04em; line-height:0.92; color:var(--cream); margin-bottom:12px;">Packages &amp;<br><span style="color:var(--gold);">Pricing</span></h2>
+      <p style="font-size:15px; color:var(--muted); max-width:480px; line-height:1.8;">
+        Straightforward pricing. No surprises. Every package includes professionally
+        edited, high-resolution images delivered in an online gallery.
+      </p>
+
+      <div class="wwm-packages-grid">
+
+        <!-- Event Photography -->
+        <div class="wwm-package">
+          <div class="wwm-package-name">Event Photography</div>
+          <div class="wwm-package-price">
+            <span class="from">Starting at</span>
+            <span class="amount">$200</span>
+            <span class="from">/hour</span>
+          </div>
+          <p class="wwm-package-desc">
+            2-hour minimum. On-the-ground coverage with an editorial eye —
+            candid, alive, and true to the energy of the room. Professionally
+            edited, high-resolution images delivered in an online gallery.
+          </p>
+          <ul class="wwm-package-includes">
+            <li>Birthdays &amp; celebrations</li>
+            <li>Networking events &amp; launch parties</li>
+            <li>Community &amp; cultural events</li>
+            <li>Concerts at local venues</li>
+            <li>Pop-ups, restaurant events &amp; weekly events</li>
+            <li>High-res edited images in an online gallery</li>
+          </ul>
+        </div>
+
+        <!-- Corporate -->
+        <div class="wwm-package">
+          <div class="wwm-package-name">Corporate Events</div>
+          <div class="wwm-package-price">
+            <span class="from">Starting at</span>
+            <span class="amount">$1,200</span>
+          </div>
+          <p class="wwm-package-desc">
+            Full professional coverage for high-stakes events. Polished,
+            press-ready imagery delivered with fast turnaround and consistent
+            quality your brand can count on.
+          </p>
+          <ul class="wwm-package-includes">
+            <li>Conferences &amp; company events</li>
+            <li>Galas &amp; awards ceremonies</li>
+            <li>Brand activations &amp; corporate celebrations</li>
+            <li>Team events</li>
+            <li>High-res edited images in an online gallery</li>
+            <li>Custom scope and deliverables on request</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Add-ons -->
+      <div class="wwm-addons">
+        <h3>Add-Ons</h3>
+        <div class="wwm-addons-grid">
+
+          <div class="wwm-addon">
+            <div class="wwm-addon-price">$250<span style="font-size:14px;">+</span></div>
+            <div class="wwm-addon-name">Content Recap Video</div>
+            <div class="wwm-addon-desc">A social-ready highlight video delivered within 24 to 48 hours. Available as an add-on to any photography package. Pricing based on event duration, footage, and deliverable count.</div>
+          </div>
+
+          <div class="wwm-addon">
+            <div class="wwm-addon-price">+$75</div>
+            <div class="wwm-addon-name">24-Hour Rush Delivery</div>
+            <div class="wwm-addon-desc">Receive your fully edited gallery within 24 hours of the event.</div>
+          </div>
+
+          <div class="wwm-addon">
+            <div class="wwm-addon-price">Varies</div>
+            <div class="wwm-addon-name">Travel Fee</div>
+            <div class="wwm-addon-desc">Events outside the Atlanta metro area may incur a travel fee based on distance.</div>
+          </div>
+
+        </div>
+        <p class="wwm-rates-note">
+          Every event is different. Final pricing is based on coverage needs,
+          deliverables, and licensing requirements. Reach out and let's talk.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEB DESIGN -->
+  <section class="wwm-web">
+    <div class="container">
+      <span class="wwm-eyebrow" style="color:var(--gold); font-size:10px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; display:block; margin-bottom:8px;">Also Available</span>
+      <div class="wwm-web-inner">
+
+        <div class="wwm-web-text">
+          <h3>Need a site to<br><span>match the vibe?</span></h3>
+          <p>
+            Beyond the camera, I'm also a web designer and developer. Through
+            <strong style="color:var(--cream);">Floye Creative Co.</strong> I build custom websites
+            for creatives, event organizers, and small businesses — fast, mobile-first,
+            and built to represent your brand properly.
+          </p>
+          <p>
+            Ask about package deals that combine event photography, recap video,
+            and a custom website. One partner, one cohesive brand, one less thing to manage.
+          </p>
+
+          <div class="wwm-web-features">
+            <div class="wwm-web-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Custom websites for events, brands, and creatives
+            </div>
+            <div class="wwm-web-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Photography + web design bundle packages available
+            </div>
+            <div class="wwm-web-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Mobile-first, fast, and built to last
+            </div>
+          </div>
+        </div>
+
+        <div class="wwm-bundle">
+          <span class="wwm-bundle-badge">Ask About This</span>
+          <h4>The Full Package</h4>
+          <p>
+            Event photography, social recap video, and a custom website or landing page —
+            everything your event or brand needs to show up professionally online.
+            Custom quoted based on scope.
+          </p>
+          <a href="https://www.floyecreative.co/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-bottom:12px; width:100%; justify-content:center;">
+            View Web Design Work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a href="mailto:hello.vibewithsammi@gmail.com?subject=Bundle Package Inquiry" class="btn btn-gold" style="width:100%; justify-content:center;">
+            Ask About a Bundle
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="wwm-cta">
+    <div class="container">
+      <span class="wwm-eyebrow" style="color:var(--gold); font-size:10px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; display:block; text-align:center; margin-bottom:16px;">Let's Talk</span>
+      <h2>Ready to<br><span>Book?</span></h2>
+      <p>
+        Send me the details about your event — date, location, what you need —
+        and I'll get back to you within 24 hours.
+      </p>
+      <div class="wwm-cta-buttons">
+        <a href="mailto:hello.vibewithsammi@gmail.com?subject=Event Photography Inquiry" class="btn btn-gold">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello.vibewithsammi@gmail.com
+        </a>
+        <a href="https://instagram.com/vibewithsammi" target="_blank" rel="noopener" class="btn btn-outline">
+          DM on Instagram
+        </a>
+        <a href="media-kit.html" class="btn btn-outline">
+          View Media Kit
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="background:#04090F; border-top: 1px solid rgba(175,194,213,0.07); padding: 28px 0;">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <p style="font-size:12px; color:rgba(175,194,213,0.3); letter-spacing:0.05em;">© 2026 Sammi Oyeniyi · Vibe With Sammi</p>
+      <a href="index.html" style="font-size:12px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase;">Back to Site</a>
+    </div>
+  </footer>
+
+</body>
+</html>
